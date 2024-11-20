@@ -1,0 +1,47 @@
+{
+  "name": "@ibrains-design/react",
+  "version": "0.77.1",
+  "description": "The react wrapper for ibrains design",
+  "keywords": [
+    "ui-machines",
+    "state-machines",
+    "react",
+    "use-machine",
+    "hook"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@ibrains-design/core": "workspace:*",
+    "@ibrains-design/store": "workspace:*",
+    "@ibrains-design/types": "workspace:*",
+    "proxy-compare": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@ibrains-design/utils": "workspace:*",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "clean-package": "2.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "main": "src/index.ts"
+}

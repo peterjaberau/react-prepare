@@ -1,0 +1,19 @@
+```svelte
+<script lang="ts">
+  import * as numberInput from "@ibrains-design/number-input"
+  import { normalizeProps, useMachine } from "@ibrains-design/svelte"
+
+  const [snapshot, send] = useMachine(numberInput.machine({ id: "1" }))
+
+  const api = $derived(numberInput.connect(snapshot, send, normalizeProps))
+</script>
+
+<div {...api.getRootProps()}>
+  <label {...api.getLabelProps()}>Enter number:</label>
+  <div>
+    <button {...api.getDecrementTriggerProps()}>DEC</button>
+    <input {...api.getInputProps()} />
+    <button {...api.getIncrementTriggerProps()}>INC</button>
+  </div>
+</div>
+```

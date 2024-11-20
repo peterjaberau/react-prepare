@@ -1,0 +1,20 @@
+```tsx
+import * as collapsible from "@ibrains-design/collapsible"
+import { normalizeProps, useMachine } from "@ibrains-design/solid"
+import { createMemo, createUniqueId } from "solid-js"
+
+function Collapsible() {
+  const [state, send] = useMachine(
+    collapsible.machine({ id: createUniqueId() }),
+  )
+
+  const api = createMemo(() => collapsible.connect(state, send, normalizeProps))
+
+  return (
+    <div {...api().getRootProps()}>
+      <button {...api().getTriggerProps()}>Collapse Trigger</button>
+      <div {...api().getContentProps()}>Collape Content</div>
+    </div>
+  )
+}
+```

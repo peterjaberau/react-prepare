@@ -1,0 +1,20 @@
+```jsx
+import * as ibrainsdSwitch from "@ibrains-design/switch"
+import { useMachine, normalizeProps } from "@ibrains-design/react"
+
+function Checkbox() {
+  const [state, send] = useMachine(ibrainsdSwitch.machine({ id: "1" }))
+
+  const api = ibrainsdSwitch.connect(state, send, normalizeProps)
+
+  return (
+    <label {...api.getRootProps()}>
+      <input {...api.getHiddenInputProps()} />
+      <span {...api.getControlProps()}>
+        <span {...api.getThumbProps()} />
+      </span>
+      <span {...api.getLabelProps()}>{api.checked ? "On" : "Off"}</span>
+    </label>
+  )
+}
+```

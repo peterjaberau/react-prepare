@@ -1,0 +1,42 @@
+{
+  "name": "@ibrains-design/dismissable",
+  "version": "0.77.1",
+  "description": "Dismissable layer utilities for the DOM",
+  "keywords": [
+    "js",
+    "utils",
+    "dimissable",
+    "layer",
+    "close",
+    "signal",
+    "outside-click"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "lint": "eslint src",
+    "test-ci": "pnpm test --ci --runInBand -u",
+    "test-watch": "pnpm test --watchAll",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@ibrains-design/interact-outside": "workspace:*",
+    "@ibrains-design/dom-query": "workspace:*",
+    "@ibrains-design/dom-event": "workspace:*",
+    "@ibrains-design/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "main": "src/index.ts"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@ibrains-design/auto-resize",
+  "version": "0.77.1",
+  "description": "Autoresize utilities for the web",
+  "keywords": [
+    "js",
+    "utils",
+    "auto-resize"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "lint": "eslint src",
+    "test-ci": "pnpm test --ci --runInBand -u",
+    "test-watch": "pnpm test --watchAll",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@ibrains-design/dom-query": "workspace:*"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "main": "src/index.ts"
+}

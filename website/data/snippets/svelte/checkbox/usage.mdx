@@ -1,0 +1,17 @@
+```svelte
+<script lang="ts">
+  import * as checkbox from "@ibrains-design/checkbox"
+  import { normalizeProps, useMachine } from "@ibrains-design/svelte"
+
+  const [snapshot, send] = useMachine(checkbox.machine({ id: "1" }))
+  const api = $derived(checkbox.connect(snapshot, send, normalizeProps))
+</script>
+
+<label {...api.getRootProps()}>
+  <span {...api.getLabelProps()}>
+    Input is {api.checked ? "checked" : "unchecked"}
+  </span>
+  <div {...api.getControlProps()}></div>
+  <input {...api.getHiddenInputProps()} />
+</label>
+```

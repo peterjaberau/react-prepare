@@ -1,0 +1,20 @@
+```html
+<script setup>
+  import * as collapsible from "@ibrains-design/collapsible"
+  import { normalizeProps, useMachine } from "@ibrains-design/vue"
+  import { computed } from "vue"
+
+  const [state, send] = useMachine(collapsible.machine({ id: "1" }))
+
+  const api = computed(() =>
+    collapsible.connect(state.value, send, normalizeProps),
+  )
+</script>
+
+<template>
+  <div v-bind="api.getRootProps()">
+    <button v-bind="api.getTriggerProps()">Collapse Trigger</button>
+    <div v-bind="api.getContentProps()">Collape Content</div>
+  </div>
+</template>
+```

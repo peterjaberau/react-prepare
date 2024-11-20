@@ -1,0 +1,18 @@
+```tsx
+import * as collapsible from "@ibrains-design/collapsible"
+import { normalizeProps, useMachine } from "@ibrains-design/react"
+import { useId } from "react"
+
+function Collapsible() {
+  const [state, send] = useMachine(collapsible.machine({ id: useId() }))
+
+  const api = collapsible.connect(state, send, normalizeProps)
+
+  return (
+    <div {...api.getRootProps()}>
+      <button {...api.getTriggerProps()}>Collapse Trigger</button>
+      <div {...api.getContentProps()}>Collape Content</div>
+    </div>
+  )
+}
+```

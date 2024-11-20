@@ -1,0 +1,37 @@
+{
+  "name": "@ibrains-design/interact-outside",
+  "version": "0.77.1",
+  "description": "Track interations or focus outside an element",
+  "keywords": [
+    "js",
+    "utils",
+    "interact-outside"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "lint": "eslint src",
+    "test-ci": "pnpm test --ci --runInBand -u",
+    "test-watch": "pnpm test --watchAll",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@ibrains-design/dom-query": "workspace:*",
+    "@ibrains-design/dom-event": "workspace:*",
+    "@ibrains-design/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "main": "src/index.ts"
+}

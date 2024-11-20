@@ -1,0 +1,31 @@
+```md
+<script setup>
+import * as hoverCard from "@ibrains-design/hover-card"
+import { normalizeProps, useMachine } from "@ibrains-design/vue"
+import { computed, Teleport } from "vue"
+
+const [state, send] = useMachine(hoverCard.machine({ id: "1" }))
+
+const api = computed(() => hoverCard.connect(state.value, send, normalizeProps))
+</script>
+
+<template>
+  <a
+    href="https://twitter.com/ibrainsd_js"
+    target="_blank"
+    v-bind="api.getTriggerProps()"
+  >
+    Twitter
+  </a>
+  <Teleport to="body" v-if="api.open">
+    <div v-bind="api.getPositionerProps()">
+      <div v-bind="api.getContentProps()">
+        <div v-bind="api.getArrowProps()">
+          <div v-bind="api.getArrowTipProps()" />
+        </div>
+        Twitter Preview
+      </div>
+    </div>
+  </Teleport>
+</template>
+```

@@ -1,0 +1,24 @@
+import { createMachine, ref } from "@ibrains-design/core"
+import { compact } from "@ibrains-design/utils"
+import type { MachineContext, MachineState, UserDefinedContext } from "./{{dashCase machine}}.types"
+
+export function machine(userContext: UserDefinedContext){
+  const ctx = compact(userContext)
+  return createMachine<MachineContext, MachineState>(
+    {
+      id: "{{machine}}",
+      initial: "idle",
+      context: {
+        ...ctx
+      },
+      states: {
+      },
+    },
+    {
+      guards: {
+      },
+      actions: {
+      },
+    },
+  )
+}

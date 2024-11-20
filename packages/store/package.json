@@ -1,0 +1,36 @@
+{
+  "name": "@ibrains-design/store",
+  "version": "0.77.1",
+  "description": "The reactive store package for ibrainsd machines",
+  "keywords": [
+    "js",
+    "utils",
+    "store",
+    "reactivity"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "lint": "eslint src",
+    "test-ci": "pnpm test --ci --runInBand -u",
+    "test-watch": "pnpm test --watchAll",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "proxy-compare": "3.0.0"
+  },
+  "clean-package": "../../clean-package.config.json",
+  "main": "src/index.ts",
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  }
+}

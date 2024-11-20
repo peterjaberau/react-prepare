@@ -1,0 +1,30 @@
+{
+  "name": "@ibrains-design/element-rect",
+  "version": "0.77.1",
+  "description": "observe element&#x27;s rect over time",
+  "keywords": [
+    "js",
+    "utils",
+    "element-rect"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "main": "src/index.ts",
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  }
+}

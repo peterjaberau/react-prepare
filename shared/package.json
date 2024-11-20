@@ -1,0 +1,9 @@
+{
+  "name": "@ibrains-design/shared",
+  "version": "0.0.4",
+  "main": "src/index.ts",
+  "private": true,
+  "dependencies": {
+    "@ibrains-design/tour": "workspace:*"
+  }
+}

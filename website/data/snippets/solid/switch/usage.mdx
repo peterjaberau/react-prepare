@@ -1,0 +1,21 @@
+```jsx
+import * as ibrainsdSwitch from "@ibrains-design/switch"
+import { normalizeProps, useMachine } from "@ibrains-design/solid"
+import { createMemo, createUniqueId } from "solid-js"
+
+function Checkbox() {
+  const [state, send] = useMachine(ibrainsdSwitch.machine({ id: "1" }))
+
+  const api = createMemo(() => ibrainsdSwitch.connect(state, send, normalizeProps))
+
+  return (
+    <label {...api().getRootProps()}>
+      <input {...api().getHiddenInputProps()} />
+      <span {...api().getControlProps()}>
+        <span {...api().getThumbProps()} />
+      </span>
+      <span {...api().getLabelProps()}>{api.checked ? "On" : "Off"}</span>
+    </label>
+  )
+}
+```

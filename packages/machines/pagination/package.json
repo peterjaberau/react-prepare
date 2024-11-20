@@ -1,0 +1,42 @@
+{
+  "name": "@ibrains-design/pagination",
+  "version": "0.77.1",
+  "description": "Core logic for the pagination widget implemented as a state machine",
+  "keywords": [
+    "js",
+    "machine",
+    "xstate",
+    "statechart",
+    "component",
+    "chakra-ui",
+    "pagination"
+  ],
+  "author": "Abraham Aremu <anubra266@gmail.com>",
+  "license": "MIT",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@ibrains-design/anatomy": "workspace:*",
+    "@ibrains-design/dom-query": "workspace:*",
+    "@ibrains-design/utils": "workspace:*",
+    "@ibrains-design/core": "workspace:*",
+    "@ibrains-design/types": "workspace:*"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "main": "src/index.ts"
+}

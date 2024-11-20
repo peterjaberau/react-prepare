@@ -1,0 +1,35 @@
+{
+  "name": "@ibrains-design/dom-event",
+  "version": "0.77.1",
+  "description": "",
+  "keywords": [
+    "js",
+    "utils",
+    "pointer-event"
+  ],
+  "license": "MIT",
+  "main": "src/index.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "dependencies": {
+    "@ibrains-design/types": "workspace:*",
+    "@ibrains-design/dom-query": "workspace:*",
+    "@ibrains-design/text-selection": "workspace:*"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  }
+}

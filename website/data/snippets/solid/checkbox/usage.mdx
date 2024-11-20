@@ -1,0 +1,21 @@
+```jsx
+import * as checkbox from "@ibrains-design/checkbox"
+import { normalizeProps, useMachine } from "@ibrains-design/solid"
+import { createMemo, createUniqueId } from "solid-js"
+
+function Checkbox() {
+  const [state, send] = useMachine(checkbox.machine({ id: createUniqueId() }))
+
+  const api = createMemo(() => checkbox.connect(state, send, normalizeProps))
+
+  return (
+    <label {...api().getRootProps()}>
+      <span {...api().getLabelProps()}>
+        Input is {api().checked ? "checked" : "unchecked"}
+      </span>
+      <div {...api().getControlProps()} />
+      <input {...api().getHiddenInputProps()} />
+    </label>
+  )
+}
+```

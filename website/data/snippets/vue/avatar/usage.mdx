@@ -1,0 +1,18 @@
+```html
+<script setup>
+  import * as avatar from "@ibrains-design/avatar"
+  import { normalizeProps, useMachine } from "@ibrains-design/vue"
+  import { computed } from "vue"
+
+  const [state, send] = useMachine(avatar.machine({ id: "1" }))
+
+  const api = computed(() => avatar.connect(state.value, send, normalizeProps))
+</script>
+
+<template>
+  <div v-bind="api.getRootProps()">
+    <span v-bind="api.getFallbackProps()">PA</span>
+    <img alt="PA" :src="src" v-bind="api.getImageProps()" />
+  </div>
+</template>
+```

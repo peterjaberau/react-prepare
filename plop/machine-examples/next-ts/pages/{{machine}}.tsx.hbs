@@ -1,0 +1,30 @@
+import * as {{camelize machine}} from "@ibrains-design/{{machine}}"
+import { useMachine, normalizeProps } from "@ibrains-design/react"
+import { {{camelize machine}}Controls, {{camelize machine}}Data } from "@ibrains-design/shared"
+import { useId } from "react"
+import { StateVisualizer } from "../components/state-visualizer"
+import { Toolbar } from "../components/toolbar"
+import { useControls } from "../hooks/use-controls"
+
+export default function Page() {
+  const controls = useControls({{camelize machine}}Controls)
+
+  const [state, send] = useMachine({{camelize machine}}.machine({ id: useId() }), {
+    context: controls.context,
+  })
+
+  const api = {{camelize machine}}.connect(state, send, normalizeProps)
+
+  return (
+    <>
+      <main className="{{machine}}">
+        <div {...api.getRootProps()}>
+        </div>
+      </main>
+
+      <Toolbar controls={controls.ui}>
+        <StateVisualizer state={state} />
+      </Toolbar>
+    </>
+  )
+}
