@@ -46,7 +46,7 @@ export class CommonConfigWrapper extends NodeWrapper {
     rest = JSONPipeOut(rest, false);
 
     if ($$editor.filterProps) {
-      rest = $$editor.filterProps.call($$editor.plugin, rest, $$node);
+      rest = $$editor.filterProps.call($$editor.plugin, rest, $$node as any);
     }
 
     if ($$editor.renderRenderer) {

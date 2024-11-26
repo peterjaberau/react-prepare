@@ -1,90 +1,88 @@
-import {RendererProps, isObject} from 'amis-core';
-import {observer} from 'mobx-react';
-import {isAlive} from 'mobx-state-tree';
-import React from 'react';
-import {findDOMNode} from 'react-dom';
-import merge from 'lodash/merge';
-import omit from 'lodash/omit';
-import {RendererInfo} from '../plugin';
-import {EditorNodeType} from '../store/node';
-import {autobind, isEmpty} from '../util';
+import { RendererProps, isObject } from "amis-core"
+import { observer } from "mobx-react"
+import { isAlive } from "mobx-state-tree"
+import React from "react"
+import { findDOMNode } from "react-dom"
+import merge from "lodash/merge"
+import omit from "lodash/omit"
+import { RendererInfo } from "../plugin"
+import { EditorNodeType } from "../store/node"
+import { autobind, isEmpty } from "../util"
 
 export interface NodeWrapperProps extends RendererProps {
-  $$editor: RendererInfo;
-  $$node?: EditorNodeType;
+  $$editor: RendererInfo
+  $$node?: EditorNodeType
 }
 
 @observer
 export class NodeWrapper extends React.Component<NodeWrapperProps> {
+  omitMockProps = ["id", "$$id", "enable", "maxDisplayRows"]
+  ref: any
 
-  omitMockProps = ['id', '$$id', 'enable', 'maxDisplayRows'];
+  constructor(props: NodeWrapperProps) {
+    super(props)
+    this.refFn = this.refFn.bind(this)
+  }
 
   componentDidMount() {
-    this.markDom(this.props.$$editor.id);
+    this.markDom(this.props.$$editor.id)
 
-
-    const node = this.props.$$node;
+    const node = this.props.$$node
     node &&
       requestAnimationFrame(() => {
-        () => isAlive(node) && node.calculateHighlightBox();
-      });
+        ;() => isAlive(node) && node.calculateHighlightBox()
+      })
   }
 
   componentDidUpdate(prevProps: NodeWrapperProps) {
-    this.markDom(this.props.$$editor.id);
+    this.markDom(this.props.$$editor.id)
   }
 
-  ref: any;
   getWrappedInstance() {
-    return this.ref;
+    return this.ref
   }
 
-  @autobind
   refFn(ref: any) {
-    this.ref = ref;
+    this.ref = ref
   }
-
 
   markDom(id: string) {
-    const root = findDOMNode(this) as HTMLElement;
+    const root = findDOMNode(this) as HTMLElement
 
     if (!root || !id) {
-      return;
+      return
     }
 
-    const info = this.props.$$editor;
-    const visible =
-      this.props.$$visible !== false && this.props.$$hidden !== true;
-    let dom = info.wrapperResolve ? info.wrapperResolve(root) : root;
-    (Array.isArray(dom) ? dom : dom ? [dom] : []).forEach(dom => {
-      dom.setAttribute('data-editor-id', id);
-      dom.setAttribute('name', this.props.id);
-      dom.setAttribute('data-visible', visible ? '' : 'false');
-      dom.setAttribute('data-hide-text', visible ? '' : '<隐藏状态>');
+    const info = this.props.$$editor
+    const visible = this.props.$$visible !== false && this.props.$$hidden !== true
+    let dom = info.wrapperResolve ? info.wrapperResolve(root) : root
+    ;(Array.isArray(dom) ? dom : dom ? [dom] : []).forEach((dom) => {
+      dom.setAttribute("data-editor-id", id)
+      dom.setAttribute("name", this.props.id)
+      dom.setAttribute("data-visible", visible ? "" : "false")
+      dom.setAttribute("data-hide-text", visible ? "" : "<Hidden state>")
 
       if (info.regions) {
-        dom.setAttribute('data-container', '');
+        dom.setAttribute("data-container", "")
       } else {
-        dom.removeAttribute('data-container');
+        dom.removeAttribute("data-container")
       }
-    });
-    info.plugin?.markDom?.(dom, this.props);
+    })
+    info.plugin?.markDom?.(dom, this.props)
   }
 
   render() {
-
-    let {$$editor, $$node, store, ...rest} = this.props;
-    const renderer = $$editor.renderer;
+    let { $$editor, $$node, store, ...rest } = this.props
+    const renderer = $$editor.renderer
 
     if ($$editor.filterProps) {
-      rest = $$editor.filterProps.call($$editor.plugin, rest, $$node);
+      rest = $$editor.filterProps.call($$editor.plugin, rest, $$node as any)
     }
 
-    const mockProps = omit(rest?.editorSetting?.mock, this.omitMockProps);
-
+    const mockProps = omit(rest?.editorSetting?.mock, this.omitMockProps)
 
     if (isObject(mockProps) && !isEmpty(mockProps)) {
-      rest = merge(rest, mockProps);
+      rest = merge(rest, mockProps)
     }
 
     if ($$editor.renderRenderer) {
@@ -96,16 +94,15 @@ export class NodeWrapper extends React.Component<NodeWrapperProps> {
           ...$$node?.state,
           $$editor,
           ...$$editor.wrapperProps,
-          ref: this.refFn
+          ref: this.refFn,
         },
-        $$editor
-      );
+        $$editor,
+      )
     }
-    const Component = renderer.component!;
+    const Component = renderer.component!
 
     const supportRef =
-      Component.prototype?.isReactComponent ||
-      (Component as any).$$typeof === Symbol.for('react.forward_ref');
+      Component.prototype?.isReactComponent || (Component as any).$$typeof === Symbol.for("react.forward_ref")
 
     return (
       <Component
@@ -116,6 +113,6 @@ export class NodeWrapper extends React.Component<NodeWrapperProps> {
         {...$$editor.wrapperProps}
         ref={supportRef ? this.refFn : undefined}
       />
-    );
+    )
   }
 }

@@ -10,14 +10,16 @@ import {BaseEventContext, BasicPanelItem, PluginEvent} from '../plugin';
 export default class MiniEditor extends Editor {
   constructor(props: EditorProps) {
     super(props);
-    this.manager.on('build-panels', this.buildPanels);
+    this.manager.on('build-panels', this.buildPanels as any);
+
+    this.buildPanels = this.buildPanels.bind(this);
   }
 
   componentWillUnmount() {
-    this.manager.off('build-panels', this.buildPanels);
+    this.manager.off('build-panels', this.buildPanels as any);
   }
 
-  @autobind
+
   buildPanels(event: PluginEvent<BaseEventContext>) {
     const panels: Array<BasicPanelItem> = event.context.data!;
 

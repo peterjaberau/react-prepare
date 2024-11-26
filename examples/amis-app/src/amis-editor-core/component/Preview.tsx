@@ -27,15 +27,7 @@ import type {RendererConfig} from 'amis-core';
 import IFramePreview from './IFramePreview';
 
 export interface PreviewProps {
-  // isEditorEnabled?: (
-  //   info: any,
-  //   path: string,
-  //   renderer: any,
-  //   schema: any
-  // ) => boolean;
-
   theme?: string;
-
   appLocale?: string;
   amisEnv?: any;
   className?: string;
@@ -58,7 +50,28 @@ export interface PreviewState {
 
 @observer
 export default class Preview extends Component<PreviewProps> {
-  currentDom: HTMLElement;
+
+  constructor(props: PreviewProps) {
+    super(props);
+    this.contentsRef = this.contentsRef.bind(this);
+    this.handlePanelChange = this.handlePanelChange.bind(this);
+    this.handeMouseDown = this.handeMouseDown.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleNavSwitch = this.handleNavSwitch.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handeMouseOver = this.handeMouseOver.bind(this);
+    this.handleDragEnter = this.handleDragEnter.bind(this);
+    this.handleDragLeave = this.handleDragLeave.bind(this);
+    this.handleDragOver = this.handleDragOver.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
+    this.handleWidgetsDragEnter = this.handleWidgetsDragEnter.bind(this);
+    this.getCurrentTarget = this.getCurrentTarget.bind(this);
+    this.rendererResolver = this.rendererResolver.bind(this);
+  }
+
+
+  currentDom: HTMLElement | null = null;
   dialogReaction: any;
   env: RenderOptions = {
     ...this.props.manager.env,
@@ -69,7 +82,7 @@ export default class Preview extends Component<PreviewProps> {
       }
 
       toast[type]
-        ? toast[type](msg, conf || (type === 'error' ? '系统错误' : '系统消息'))
+        ? toast[type](msg, conf || (type === 'error' ? 'System error': 'System message'))
         : console.warn('[Notify]', type, msg);
     },
     theme: this.props.theme,
@@ -82,12 +95,14 @@ export default class Preview extends Component<PreviewProps> {
   componentDidMount() {
     this.currentDom = findDOMNode(this) as HTMLElement;
 
-    this.currentDom.addEventListener('mouseleave', this.handleMouseLeave);
-    this.currentDom.addEventListener('mousemove', this.handleMouseMove);
-    this.currentDom.addEventListener('click', this.handleClick, true);
-    this.currentDom.addEventListener('mouseover', this.handeMouseOver);
+    if (this.currentDom) {
+      this.currentDom.addEventListener('mouseleave', this.handleMouseLeave);
+      this.currentDom.addEventListener('mousemove', this.handleMouseMove);
+      this.currentDom.addEventListener('click', this.handleClick, true);
+      this.currentDom.addEventListener('mouseover', this.handeMouseOver);
+      this.currentDom.addEventListener('mousedown', this.handeMouseDown);
+    }
 
-    this.currentDom.addEventListener('mousedown', this.handeMouseDown);
 
     this.props.manager.on('after-update', this.handlePanelChange);
   }
@@ -99,9 +114,9 @@ export default class Preview extends Component<PreviewProps> {
       this.currentDom.removeEventListener('click', this.handleClick, true);
       this.currentDom.removeEventListener('mouseover', this.handeMouseOver);
       this.currentDom.removeEventListener('mousedown', this.handeMouseDown);
-      this.props.manager.off('after-update', this.handlePanelChange);
-      this.dialogReaction?.();
     }
+    this.props.manager.off('after-update', this.handlePanelChange);
+    this.dialogReaction?.();
 
     this.scrollLayer?.removeEventListener('scroll', this.handlePanelChange);
 
@@ -112,7 +127,6 @@ export default class Preview extends Component<PreviewProps> {
   layer?: HTMLDivElement;
   scrollLayer?: HTMLDivElement;
 
-  @autobind
   contentsRef(ref: HTMLDivElement | null) {
     if (ref) {
       this.layer = ref.parentElement!.querySelector(
@@ -138,8 +152,8 @@ export default class Preview extends Component<PreviewProps> {
 
 
   readonly unReaction: () => void = reactionWithOldValue(
-    () => [this.getHighlightNodes(), this.props.store.activeId],
-    ([ids]: [Array<string>], oldValue: [Array<string>]) => {
+    () => [this.getHighlightNodes(), this.props.store.activeId] as any,
+    ([ids], oldValue) => {
       const store = this.props.store;
       // requestAnimationFrame(() => {
       //   this.calculateHighlightBox(ids);
@@ -155,7 +169,6 @@ export default class Preview extends Component<PreviewProps> {
     }
   );
 
-  @autobind
   handlePanelChange() {
     if (this.layer && this.scrollLayer) {
       requestAnimationFrame(() => {
@@ -170,18 +183,16 @@ export default class Preview extends Component<PreviewProps> {
     );
   }
 
-  getHighlightNodes() {
+  getHighlightNodes(): any[] {
     const store = this.props.store;
-    return store.highlightNodes.map(item => item.id);
+    return store.highlightNodes.map(item => item.id) as any[];
   }
 
-  @autobind
   calculateHighlightBox(ids: Array<string>) {
     const store = this.props.store;
     this.layer && store.calculateHighlightBox(ids);
   }
 
-  @autobind
   handeMouseDown(e: MouseEvent) {
     const isLeftButton =
       (e.button === 1 && window.event !== null) || e.button === 0;
@@ -299,7 +310,6 @@ export default class Preview extends Component<PreviewProps> {
     ids.length && this.props.manager.setSelection(ids);
   }
 
-  @autobind
   handleClick(e: MouseEvent) {
     const store = this.props.store;
     const target = (e.target as HTMLElement).closest(`[data-editor-id]`);
@@ -353,13 +363,11 @@ export default class Preview extends Component<PreviewProps> {
     }
   }
 
-  @autobind
   handleNavSwitch(id: string) {
     const store = this.props.store;
     store.setActiveId(id);
   }
 
-  @autobind
   handleMouseMove(e: MouseEvent) {
     if (this.doingSelection || this.props.manager.disableHover) {
       return;
@@ -405,14 +413,12 @@ export default class Preview extends Component<PreviewProps> {
     }
   }
 
-  @autobind
   handleMouseLeave() {
     const store = this.props.store;
     store.setMouseMoveRegion('');
     store.setHoverId('');
   }
 
-  @autobind
   handeMouseOver(e: MouseEvent) {
     if (this.props.editable) {
       e.preventDefault();
@@ -420,7 +426,6 @@ export default class Preview extends Component<PreviewProps> {
     }
   }
 
-  @autobind
   handleDragEnter(e: React.DragEvent) {
     if (!this.props.editable) {
 
@@ -430,7 +435,6 @@ export default class Preview extends Component<PreviewProps> {
     manager.dnd.dragEnter(e.nativeEvent);
   }
 
-  @autobind
   handleDragLeave(e: React.DragEvent) {
     if (!this.props.editable) {
       return;
@@ -439,7 +443,6 @@ export default class Preview extends Component<PreviewProps> {
     manager.dnd.dragLeave(e.nativeEvent);
   }
 
-  @autobind
   handleDragOver(e: React.DragEvent) {
     if (!this.props.editable) {
       return;
@@ -448,7 +451,6 @@ export default class Preview extends Component<PreviewProps> {
     manager.dnd.dragOver(e.nativeEvent);
   }
 
-  @autobind
   handleDrop(e: React.DragEvent) {
     if (!this.props.editable) {
       return;
@@ -457,7 +459,6 @@ export default class Preview extends Component<PreviewProps> {
     manager.dnd.drop(e.nativeEvent);
   }
 
-  @autobind
   handleWidgetsDragEnter(e: React.DragEvent) {
     const target = e.target as HTMLElement;
     const dom = target.closest(`[data-node-id][data-node-region].region-tip`);
@@ -474,14 +475,15 @@ export default class Preview extends Component<PreviewProps> {
     id && region && manager.dnd.switchToRegion(e.nativeEvent, id, region);
   }
 
-  @autobind
   getCurrentTarget() {
     const isMobile = this.props.isMobile;
     if (isMobile) {
+      // @ts-ignore
       return this.currentDom.querySelector(
         '.ae-Preview-inner'
       ) as HTMLDivElement;
     } else {
+      // @ts-ignore
       return this.currentDom.querySelector(
         '.ae-Preview-body'
       ) as HTMLDivElement;
@@ -661,6 +663,13 @@ export interface SmartPreviewProps {
 }
 @observer
 class SmartPreview extends React.Component<SmartPreviewProps> {
+
+  constructor(props: SmartPreviewProps) {
+    super(props);
+    this.getDialogMountRef = this.getDialogMountRef.bind(this);
+  }
+
+
   dialogMountRef: React.RefObject<HTMLDivElement> = React.createRef();
 
   componentDidMount() {
@@ -703,7 +712,6 @@ class SmartPreview extends React.Component<SmartPreviewProps> {
     }
   }
 
-  @autobind
   getDialogMountRef() {
     return this.dialogMountRef.current;
   }

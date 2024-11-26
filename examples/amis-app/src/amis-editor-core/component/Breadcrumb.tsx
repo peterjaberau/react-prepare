@@ -25,7 +25,7 @@ export default class Breadcrumb extends React.Component<
   readonly breadcrumbRef = React.createRef<HTMLDivElement>();
   readonly bcnContentRef = React.createRef<HTMLDivElement>();
 
-  currentBreadcrumb: HTMLElement;
+  currentBreadcrumb: HTMLElement | null = null;
   unReaction: () => void;
   unSensor?: () => void;
 
@@ -44,6 +44,17 @@ export default class Breadcrumb extends React.Component<
         this.refreshHandleScroll(true);
       }
     );
+
+    this.refreshHandleScroll = this.refreshHandleScroll.bind(this);
+    this.getCurBreadcrumb = this.getCurBreadcrumb.bind(this);
+    this.getBreadcrumbContainer = this.getBreadcrumbContainer.bind(this);
+    this.getScrollLeft = this.getScrollLeft.bind(this);
+    this.toNumber = this.toNumber.bind(this);
+    this.HandleScroll = this.HandleScroll.bind(this);
+    this.handleScrollToLeft = this.handleScrollToLeft.bind(this);
+    this.handleScrollToRight = this.handleScrollToRight.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
   }
 
   componentDidMount() {
@@ -67,30 +78,25 @@ export default class Breadcrumb extends React.Component<
     }
   }
 
-  @autobind
   refreshHandleScroll(resetScroll?: boolean) {
     setTimeout(() => {
       this.HandleScroll(resetScroll);
     }, 0);
   }
 
-  @autobind
   getCurBreadcrumb() {
     return this.bcnContentRef.current;
   }
 
-  @autobind
   getBreadcrumbContainer() {
     return this.breadcrumbRef.current;
   }
 
-  @autobind
   getScrollLeft(): string {
     const curBreadcrumb = this.getCurBreadcrumb();
     return curBreadcrumb ? curBreadcrumb.style.left : '0';
   }
 
-  @autobind
   toNumber(pxStr: string): number {
     let curScrollLeft = 0;
     if (!pxStr) {
@@ -99,7 +105,6 @@ export default class Breadcrumb extends React.Component<
     return Number.parseInt(pxStr);
   }
 
-  @autobind
   HandleScroll(resetScroll?: boolean) {
     const scrollElem = this.getCurBreadcrumb();
     const scrollContainer = this.getBreadcrumbContainer();
@@ -121,7 +126,6 @@ export default class Breadcrumb extends React.Component<
     });
   }
 
-  @autobind
   handleScrollToLeft() {
 
     const scrollElem = this.getCurBreadcrumb();
@@ -141,7 +145,6 @@ export default class Breadcrumb extends React.Component<
     }
   }
 
-  @autobind
   handleScrollToRight() {
 
     const scrollElem = this.getCurBreadcrumb();
@@ -163,7 +166,6 @@ export default class Breadcrumb extends React.Component<
     this.refreshHandleScroll();
   }
 
-  @autobind
   handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     const dom = e.currentTarget;
     const id = dom.getAttribute('data-node-id')!;
@@ -186,7 +188,6 @@ export default class Breadcrumb extends React.Component<
     }
   }
 
-  @autobind
   handleMouseEnter(e: React.MouseEvent<HTMLAnchorElement>) {
     const dom = e.currentTarget;
     const id = dom.getAttribute('data-node-id')!;

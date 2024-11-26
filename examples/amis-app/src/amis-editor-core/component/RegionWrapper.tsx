@@ -25,8 +25,8 @@ export interface RegionWrapperProps {
 
 export class RegionWrapper extends React.Component<RegionWrapperProps> {
   static contextType = EditorNodeContext;
-  parentNode: EditorNodeType;
-  editorNode: EditorNodeType;
+  parentNode: EditorNodeType  | null = null
+  editorNode: EditorNodeType  | null = null
 
   UNSAFE_componentWillMount() {
     this.parentNode = (this.context as any)!;

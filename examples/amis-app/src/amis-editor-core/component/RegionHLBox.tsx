@@ -79,7 +79,7 @@ export default observer(function (props: HighlightBoxProps) {
             type="button"
             className="clear-icon-btn"
             title={''}
-            data-tooltip={'点击清空当前区域'}
+            data-tooltip={'Click to clear the current area'}
             data-position={'bottom'}
             onClick={handleClick}
           >

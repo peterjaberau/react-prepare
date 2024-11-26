@@ -208,6 +208,11 @@ export default class Editor extends Component<EditorProps> {
     this.toDispose.push(
       this.manager.on('preview2editor', () => this.manager.rebuild())
     );
+
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMessage = this.handleMessage.bind(this);
+    this.handleContextMenu = this.handleContextMenu.bind(this);
+    this.getToolbarContainer = this.getToolbarContainer.bind(this);
   }
 
   componentDidMount() {
@@ -260,7 +265,6 @@ export default class Editor extends Component<EditorProps> {
   }
 
 
-  @autobind
   handleKeyDown(e: KeyboardEvent) {
 
     if (this.props.isSubEditor) {
@@ -403,7 +407,6 @@ export default class Editor extends Component<EditorProps> {
     }
   }
 
-  @autobind
   handleMessage(event: any) {
     if (!event.data) {
       return;
@@ -422,7 +425,6 @@ export default class Editor extends Component<EditorProps> {
   }
 
 
-  @autobind
   async handleContextMenu(e: React.MouseEvent<HTMLElement>) {
     e.persist();
     await closeContextMenus();
@@ -547,7 +549,6 @@ export default class Editor extends Component<EditorProps> {
     }
   }
 
-  @autobind
   getToolbarContainer() {
     return this.mainRef.current;
   }

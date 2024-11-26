@@ -1,102 +1,89 @@
-import type {Schema} from 'amis-core';
-import {LazyComponent} from 'amis-core';
-import React from 'react';
-import {resizeSensor, render, Icon} from 'amis';
+import type { Schema } from "amis-core"
+import { LazyComponent } from "amis-core"
+import React from "react"
+import { resizeSensor, render, Icon } from "amis"
 
 interface ThumbProps {
-  schema: Schema;
-  theme?: string;
-  env: any;
+  schema: Schema
+  theme?: string
+  env: any
 }
 interface ThumbStates {
-  scale: Boolean;
+  scale: Boolean
 }
 
 export class RendererThumb extends React.Component<ThumbProps, ThumbStates> {
-  ref: HTMLDivElement;
-  unSensor: Function;
+  ref: HTMLDivElement | null = null
+  unSensor: Function | null = null
 
   constructor(props: ThumbProps) {
-    super(props);
+    super(props)
     this.state = {
-      scale: true
-    };
-    this.rootRef = this.rootRef.bind(this);
-    this.syncHeight = this.syncHeight.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+      scale: true,
+    }
+    this.rootRef = this.rootRef.bind(this)
+    this.syncHeight = this.syncHeight.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   env = {
-    session: 'preview',
-    ...this.props.env
-  };
+    session: "preview",
+    ...this.props.env,
+  }
 
   componentWillUnmount() {
-    this.unSensor && this.unSensor();
+    this.unSensor && this.unSensor()
   }
 
   rootRef(ref: HTMLDivElement) {
-    this.ref = ref;
+    this.ref = ref
 
     if (ref) {
-      this.syncHeight();
-      this.unSensor = resizeSensor(
-        ref.firstChild?.firstChild as HTMLElement,
-        this.syncHeight
-      );
+      this.syncHeight()
+      this.unSensor = resizeSensor(ref.firstChild?.firstChild as HTMLElement, this.syncHeight)
     }
   }
 
   syncHeight() {
     if (!this.ref) {
-      return;
+      return
     }
-    const scale = this.state.scale;
-    const child = this.ref.firstChild as HTMLElement;
-    this.ref.style.cssText = `height: ${
-      child.scrollHeight / (scale ? 2 : 1)
-    }px;`;
+    const scale = this.state.scale
+    const child = this.ref.firstChild as HTMLElement
+    this.ref.style.cssText = `height: ${child.scrollHeight / (scale ? 2 : 1)}px;`
   }
 
   handleClick(e: React.MouseEvent) {
-    e.preventDefault();
+    e.preventDefault()
     this.setState({
-      scale: !this.state.scale
-    });
+      scale: !this.state.scale,
+    })
   }
 
   render() {
-    const {schema, theme} = this.props;
+    const { schema, theme } = this.props
 
     return (
       <LazyComponent
         unMountOnHidden={false}
         schema={schema}
-        component={({schema}: {schema: Schema; [key: string]: any}) => (
-          <div
-            className={`ae-RenderersPicker-thumb ${
-              this.state.scale ? 'is-scaled' : ''
-            }`}
-          >
+        component={({ schema }: { schema: Schema; [key: string]: any }) => (
+          <div className={`ae-RenderersPicker-thumb ${this.state.scale ? "is-scaled" : ""}`}>
             <div className="ae-Editor-rendererThumbWrap">
-              <div
-                className="ae-Editor-rendererThumbIcon"
-                onClick={this.handleClick}
-              >
-                <Icon icon={this.state.scale ? 'zoom-in' : 'zoom-out'} />
+              <div className="ae-Editor-rendererThumbIcon" onClick={this.handleClick}>
+                <Icon icon={this.state.scale ? "zoom-in" : "zoom-out"} />
               </div>
               <div ref={this.rootRef} className={`ae-Editor-rendererThumb`}>
                 <div className="ae-Editor-rendererThumbInner">
                   {render(
                     {
                       ...schema,
-                      mode:
-                        schema.mode === 'horizontal' ? 'normal' : schema.mode
+                      mode: schema.mode === "horizontal" ? "normal" : schema.mode,
                     },
                     {
-                      theme
+                      theme,
                     },
-                    this.env
+                    this.env,
                   )}
                 </div>
               </div>
@@ -104,6 +91,6 @@ export class RendererThumb extends React.Component<ThumbProps, ThumbStates> {
           </div>
         )}
       />
-    );
+    )
   }
 }

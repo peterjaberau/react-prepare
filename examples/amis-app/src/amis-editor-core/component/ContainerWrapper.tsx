@@ -11,11 +11,18 @@ export interface ContainerWrapperProps extends NodeWrapperProps {}
 @observer
 export class ContainerWrapper extends React.Component<ContainerWrapperProps> {
   ref: any;
+
+  constructor(props: ContainerWrapperProps) {
+    super(props);
+    this.refFn = this.refFn.bind(this);
+    this.renderChild = this.renderChild.bind(this);
+  }
+
+
   getWrappedInstance() {
     return this.ref;
   }
 
-  @autobind
   refFn(ref: any) {
     this.ref = ref;
   }
@@ -24,7 +31,6 @@ export class ContainerWrapper extends React.Component<ContainerWrapperProps> {
     Because the container renderer on Properties uses this.props.render('region', subScheme) to render child nodes.
     Therefore, ContainerWrapper only needs to modify the issued render to complete the package.
    */
-  @autobind
   renderChild(region: string, node: Schema, props: any) {
     const {render, $$editor, $$node} = this.props;
 

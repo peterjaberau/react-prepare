@@ -14,9 +14,25 @@ export interface VRendererProps extends RendererInfo {
 
 export class VRenderer extends React.Component<VRendererProps> {
   static contextType = EditorNodeContext;
-  editorNode: EditorNodeType;
+  editorNode!: EditorNodeType;
 
-  UNSAFE_componentWillMount() {
+  // UNSAFE_componentWillMount() {
+  //   const {data, path, widthMutable, ...info} = this.props;
+  //   const parent: EditorNodeType = this.context as any;
+  //   this.editorNode = parent.addChild({
+  //     id: info.id,
+  //     type: info.type,
+  //     label: info.name,
+  //     path: this.props.path,
+  //     schemaPath: info.schemaPath,
+  //     info: info,
+  //     getData: () => this.props.data,
+  //     widthMutable,
+  //     memberIndex: info.memberIndex
+  //   });
+  // }
+
+  componentDidMount() {
     const {data, path, widthMutable, ...info} = this.props;
     const parent: EditorNodeType = this.context as any;
     this.editorNode = parent.addChild({
@@ -30,10 +46,8 @@ export class VRenderer extends React.Component<VRendererProps> {
       widthMutable,
       memberIndex: info.memberIndex
     });
-  }
-
-  componentDidMount() {
     this.markDom(this.editorNode.id);
+
   }
 
   componentDidUpdate() {
