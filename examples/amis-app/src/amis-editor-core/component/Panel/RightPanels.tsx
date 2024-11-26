@@ -36,34 +36,35 @@ export class RightPanels extends React.Component<
       isOpenStatus: true,
       isFixedStatus: false
     };
+
+    this.handleFixed = this.handleFixed.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleHidden = this.handleHidden.bind(this);
+    this.getPopOverContainer = this.getPopOverContainer.bind(this);
+    this.handlePanelChangeValue = this.handlePanelChangeValue.bind(this);
   }
 
-  @autobind
   handleFixed() {
     this.setState({
       isFixedStatus: !this.state.isFixedStatus
     });
   }
 
-  @autobind
   handleSelect(key: string) {
     const store = this.props.store;
     store.changePanelKey(key);
   }
 
-  @autobind
   handleHidden() {
     this.setState({
       isOpenStatus: !this.state.isOpenStatus
     });
   }
 
-  @autobind
   getPopOverContainer() {
     return findDOMNode(this) as HTMLElement;
   }
 
-  @autobind
   handlePanelChangeValue(
     ...arg: Parameters<typeof this.props.manager.panelChangeValue>
   ) {
