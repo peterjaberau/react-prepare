@@ -283,3 +283,17 @@ export const stepsControls = defineControls({
   linear: { type: "boolean", defaultValue: false },
   orientation: { type: "select", options: ["horizontal", "vertical"] as const, defaultValue: "horizontal" },
 })
+
+export const buttonControls = defineControls({
+  text: { type: "string", defaultValue: "Click me" },
+  disabled: { type: "boolean", defaultValue: false },
+  size: { type: "select", options: ["small", "medium", "large"] as const, defaultValue: "small" },
+  variant: {
+    type: "select",
+    options: ["outlined", "dashed", "solid", "filled", "text", "link"] as const,
+    defaultValue: "",
+  },
+  danger: { type: "boolean", defaultValue: false },
+  color: { type: "select", options: ["default", "primary", "danger"] as const, defaultValue: "default" },
+  type: { type: "select", options: ["primary", "dashed", "link", "text", "default"] as const, defaultValue: "primary" },
+})

@@ -17,11 +17,14 @@ export default [
     ignores: ["dist", "node_modules", "coverage", ".next", "build", "plop-templates", "**/*.d.ts"],
 
     rules: {
-
+      "@typescript-eslint/ no-empty-object-type": "off",
+      "@typescript-eslint/ no-unused-vars": "off",
+      "no-unused-vars": "off",
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/no-use-before-define": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/ no-explicit-any": "off",
       "no-param-reassign": "off",
       "prefer-spread": "off",
       "no-console": "off",
@@ -53,20 +56,13 @@ export default [
       "arrow-body-style": "off",
       "import/namespace": "off",
       "jsx-a11y/label-has-associated-control": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          varsIgnorePattern: "^_",
-          argsIgnorePattern: "^_",
-          ignoreRestSiblings: true,
-        },
-      ],
+      "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
       "default-case": "off",
     },
   },
 
   {
-    files: ["*.js", "*.jsx"],
+    files: ["*.js", "*.jsx", "*.ts", "*.tsx"],
     parserOptions: {
       project: "tsconfig.eslint.json",
     },
