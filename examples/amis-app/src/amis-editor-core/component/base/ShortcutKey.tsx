@@ -90,16 +90,17 @@ export default class ShortcutKey extends React.Component<
     this.state = {
       visible: false
     };
+
+    this.closeShortcutKeyModal = this.closeShortcutKeyModal.bind(this);
+    this.showShortcutKeyModal = this.showShortcutKeyModal.bind(this);
   }
 
-  @autobind
   closeShortcutKeyModal() {
     this.setState({
       visible: false
     });
   }
 
-  @autobind
   showShortcutKeyModal() {
     this.setState({
       visible: true

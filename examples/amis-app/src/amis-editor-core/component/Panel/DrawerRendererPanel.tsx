@@ -17,7 +17,12 @@ export interface PanelsProps {
 
 @observer
 export class DrawerRendererPanel extends React.Component<PanelsProps> {
-  @autobind
+
+  constructor(props: PanelsProps) {
+    super(props);
+    this.getPopOverContainer = this.getPopOverContainer.bind(this);
+  }
+
   getPopOverContainer() {
     return findDOMNode(this) as HTMLElement;
   }

@@ -33,9 +33,13 @@ export class LeftPanels extends React.Component<
     this.state = {
       isFixedStatus: false // 默认非fixed模式
     };
+
+    this.handleHidden = this.handleHidden.bind(this);
+    this.handleFixed = this.handleFixed.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.getPopOverContainer = this.getPopOverContainer.bind(this);
   }
 
-  @autobind
   handleHidden() {
     const {changeLeftPanelOpenStatus, leftPanelOpenStatus, changeLeftPanelKey} =
       this.props.store;
@@ -50,14 +54,12 @@ export class LeftPanels extends React.Component<
     }
   }
 
-  @autobind
   handleFixed() {
     this.setState({
       isFixedStatus: !this.state.isFixedStatus
     });
   }
 
-  @autobind
   handleSelect(key: string) {
     const {changeLeftPanelOpenStatus, changeLeftPanelKey} = this.props.store;
     if (key) {
@@ -67,7 +69,6 @@ export class LeftPanels extends React.Component<
     }
   }
 
-  @autobind
   getPopOverContainer() {
     return findDOMNode(this) as HTMLElement;
   }

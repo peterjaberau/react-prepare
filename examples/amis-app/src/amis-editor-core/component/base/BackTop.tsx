@@ -57,6 +57,11 @@ export default class BackTop extends React.Component<
     this.state = {
       visible: props.visible !== undefined ? props.visible : false
     };
+
+    this.getDefaultTarget = this.getDefaultTarget.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.bindScrollEvent = this.bindScrollEvent.bind(this);
+    this.scrollToTop = this.scrollToTop.bind(this);
   }
 
   componentDidMount() {
@@ -69,14 +74,12 @@ export default class BackTop extends React.Component<
     }
   }
 
-  @autobind
   getDefaultTarget() {
     return this.ref.current && this.ref.current.ownerDocument
       ? this.ref.current.ownerDocument
       : window;
   }
 
-  @autobind
   handleScroll(e: React.UIEvent<HTMLElement> | {target: any}) {
     const visibilityHeight = this.props.visibilityHeight || 400;
     const scrollTop = getScroll(e.target, true);
@@ -85,7 +88,6 @@ export default class BackTop extends React.Component<
     });
   }
 
-  @autobind
   bindScrollEvent() {
     const {target} = this.props;
     this.scrollElem = target() || this.getDefaultTarget();
@@ -100,7 +102,6 @@ export default class BackTop extends React.Component<
     });
   }
 
-  @autobind
   scrollToTop(e: React.MouseEvent<HTMLDivElement>) {
     const {onClick} = this.props;
 

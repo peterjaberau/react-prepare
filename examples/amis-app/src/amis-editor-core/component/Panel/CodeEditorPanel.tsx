@@ -4,7 +4,13 @@ import {autobind} from '../../util';
 import AMisCodeEditor from './AMisCodeEditor';
 
 export default class CodeEditorPanel extends React.Component<PanelProps> {
-  @autobind
+
+  constructor(props: PanelProps) {
+    super(props);
+    this.handleCodePaste = this.handleCodePaste.bind(this);
+  }
+
+
   handleCodePaste(e: any) {
     setTimeout(() => {
       this.props.manager.patchSchema(true);

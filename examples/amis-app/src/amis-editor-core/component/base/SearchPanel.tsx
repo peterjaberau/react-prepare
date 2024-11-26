@@ -51,7 +51,7 @@ export default class SearchPanel extends React.Component<
   curTagFolded: {
     [propName: string]: boolean;
   } = {};
-  lastSearchTag: string;
+  lastSearchTag: string = '';
 
   constructor(props: any) {
     super(props);
@@ -81,6 +81,22 @@ export default class SearchPanel extends React.Component<
       curKeywordSearchHistory: this.getSearchHistory(),
       toggleTagFolderStatus: true
     };
+
+    this.getSearchHistory = this.getSearchHistory.bind(this);
+    this.bindFocusEvent = this.bindFocusEvent.bind(this);
+    this.bindBlurEvent = this.bindBlurEvent.bind(this);
+    this.updateCurKeyword = this.updateCurKeyword.bind(this);
+    this.changeTagFoldStatus = this.changeTagFoldStatus.bind(this);
+    this.bindEnterEvent = this.bindEnterEvent.bind(this);
+    this.bindClearActionEvent = this.bindClearActionEvent.bind(this);
+    this.bindTagClickEvent = this.bindTagClickEvent.bind(this);
+    this.addSearchHistory = this.addSearchHistory.bind(this);
+    this.clickKeywordEvent = this.clickKeywordEvent.bind(this);
+    this.deleteSearchHistory = this.deleteSearchHistory.bind(this);
+    this.clearSearchHistory = this.clearSearchHistory.bind(this);
+    this.updateSearchHistory = this.updateSearchHistory.bind(this);
+    this.renderNameByKeyword = this.renderNameByKeyword.bind(this);
+    this.resultIsHasScroll = this.resultIsHasScroll.bind(this);
   }
 
   componentDidMount() {
@@ -128,7 +144,6 @@ export default class SearchPanel extends React.Component<
     }
   }
 
-  @autobind
   getSearchHistory() {
     let searchHistory = [];
     if (window.localStorage) {
@@ -230,14 +245,12 @@ export default class SearchPanel extends React.Component<
     });
   }
 
-  @autobind
   bindFocusEvent() {
     this.setState({
       visible: true
     });
   }
 
-  @autobind
   bindBlurEvent() {
     const {curKeyword} = this.state;
     this.setState(
@@ -253,7 +266,6 @@ export default class SearchPanel extends React.Component<
     );
   }
 
-  @autobind
   updateCurKeyword(keywords: string) {
     let curKeyword = keywords;
     curKeyword = curKeyword ? curKeyword.trim() : curKeyword;
@@ -271,7 +283,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   changeTagFoldStatus(tagKey: string, event: any) {
     event.preventDefault();
     event.stopPropagation();
@@ -283,7 +294,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   bindEnterEvent(event: any) {
     event.preventDefault();
     const {curKeyword} = this.state;
@@ -303,7 +313,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   bindClearActionEvent() {
     this.setState(
       {
@@ -318,7 +327,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   bindTagClickEvent(tag: string) {
     const searchResult = this.state.resultByTag[tag];
     this.setState(
@@ -337,7 +345,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   addSearchHistory(newKeywords: string) {
     const {curKeywordSearchHistory} = this.state;
 
@@ -355,7 +362,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   clickKeywordEvent(keywords: string) {
     this.setState(
       {
@@ -369,7 +375,6 @@ export default class SearchPanel extends React.Component<
     );
   }
 
-  @autobind
   deleteSearchHistory(event: any, newKeywords: string) {
     event.preventDefault();
     event.stopPropagation();
@@ -380,7 +385,6 @@ export default class SearchPanel extends React.Component<
     this.updateSearchHistory();
   }
 
-  @autobind
   clearSearchHistory(event: any) {
     event.preventDefault();
     event.stopPropagation();
@@ -399,7 +403,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   updateSearchHistory() {
     if (window.localStorage) {
       const {curKeywordSearchHistory} = this.state;
@@ -411,7 +414,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   renderNameByKeyword(rendererName: string, curKeyword: string) {
     if (curKeyword && ~rendererName.indexOf(curKeyword)) {
       const keywordStartIndex = rendererName.indexOf(curKeyword);
@@ -429,7 +431,6 @@ export default class SearchPanel extends React.Component<
   }
 
 
-  @autobind
   resultIsHasScroll(
     searchSubRenderers: {
       [propName: string]: Array<any>;

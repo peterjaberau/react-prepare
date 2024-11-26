@@ -8,7 +8,17 @@ import {RendererThumb} from '../RendererThumb';
 
 @observer
 export class InsertSubRendererPanel extends React.Component<PanelProps> {
-  @autobind
+
+  constructor(props: PanelProps) {
+    super(props);
+    this.handleLeftClick = this.handleLeftClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.hadnlDBClick = this.hadnlDBClick.bind(this);
+    this.handleInsert = this.handleInsert.bind(this);
+    this.handleReplace = this.handleReplace.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
   handleLeftClick(e: React.MouseEvent) {
     const tag = e.currentTarget.getAttribute('data-value')!;
     const store = this.props.store;
@@ -16,14 +26,12 @@ export class InsertSubRendererPanel extends React.Component<PanelProps> {
     store.setInsertTag(tag);
   }
 
-  @autobind
   handleClick(e: React.MouseEvent) {
     const id = e.currentTarget.getAttribute('data-value')!;
     const store = this.props.store;
     store.setInsertSelected(id);
   }
 
-  @autobind
   hadnlDBClick(e: React.MouseEvent) {
     const id = e.currentTarget.getAttribute('data-value')!;
     const store = this.props.store;
@@ -32,21 +40,18 @@ export class InsertSubRendererPanel extends React.Component<PanelProps> {
     store.insertMode === 'replace' ? manager.replace() : manager.insert();
   }
 
-  @autobind
   handleInsert() {
     const manager = this.props.manager;
 
     manager.insert();
   }
 
-  @autobind
   handleReplace() {
     const manager = this.props.manager;
 
     manager.replace();
   }
 
-  @autobind
   handleCancel() {
     const store = this.props.store;
     store.closeInsertPanel();

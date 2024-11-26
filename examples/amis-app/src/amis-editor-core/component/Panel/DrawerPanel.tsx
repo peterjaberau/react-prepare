@@ -1,30 +1,34 @@
-import {observer} from 'mobx-react';
-import React from 'react';
-import {EditorManager} from '../../manager';
-import {EditorStoreType} from '../../store/editor';
-import {Drawer} from 'amis';
-import {autobind} from '../../util';
-import {findDOMNode} from 'react-dom';
-import {EditorNodeType} from '../../store/node';
+import { observer } from "mobx-react"
+import React from "react"
+import { EditorManager } from "../../manager"
+import { EditorStoreType } from "../../store/editor"
+import { Drawer } from "amis"
+import { autobind } from "../../util"
+import { findDOMNode } from "react-dom"
+import { EditorNodeType } from "../../store/node"
 
 export interface PanelsProps {
-  store: EditorStoreType;
-  manager: EditorManager;
-  node: EditorNodeType | undefined;
-  panelItem: any;
-  theme?: string;
+  store: EditorStoreType
+  manager: EditorManager
+  node: EditorNodeType | undefined
+  panelItem: any
+  theme?: string
 }
 
 @observer
 export class DrawerPanel extends React.Component<PanelsProps> {
-  @autobind
+  constructor(props: PanelsProps) {
+    super(props)
+    this.getPopOverContainer = this.getPopOverContainer.bind(this)
+  }
+
   getPopOverContainer() {
-    return findDOMNode(this) as HTMLElement;
+    return findDOMNode(this) as HTMLElement
   }
 
   render() {
-    const {store, manager, node, panelItem, theme} = this.props;
-    const id = store.activeId;
+    const { store, manager, node, panelItem, theme } = this.props
+    const id = store.activeId
 
     return (
       <Drawer
@@ -49,6 +53,6 @@ export class DrawerPanel extends React.Component<PanelsProps> {
           />
         ) : null}
       </Drawer>
-    );
+    )
   }
 }
