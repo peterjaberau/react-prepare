@@ -1,15 +1,24 @@
+// import 'amis/lib/themes/default.css'
+// import 'amis/lib/helper.css'
+// import 'amis/sdk/iconfont.css'
+// import 'amis-editor-core/lib/style.css'
+// import 'amis-ui/lib/themes/cxd.css'
+import "./editor.scss";
+import "amis-editor-core/lib/style.css";
+import "amis/lib/themes/cxd.css";
+
+import "amis/lib/helper.css";
+import "amis/sdk/iconfont.css";
+
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { DesktopOutlined, MobileOutlined } from "@ant-design/icons"
 import { alert, AlertComponent, confirm, SchemaObject, ToastComponent } from "amis"
-import { Editor, ShortcutKey } from "amis-editor-core"
+import { Editor, ShortcutKey } from "@/amis-editor-core"
 import { copy, fetcher, notify } from "./amisEnvUtils"
-import "@/amis/styles/editor.scss"
-import "amis-editor-core/lib/style.css";
+// import "@/amis/styles/editor.scss"
 
-import "@/amis/styles/cxd.css"
-import "@/amis/styles/lib/helper.css"
-import "@/amis/styles/lib/iconfont.css"
+
 import { getPageById } from "./db/pages.ts";
 
 

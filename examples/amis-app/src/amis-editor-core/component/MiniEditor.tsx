@@ -4,22 +4,20 @@ import cx from 'classnames';
 import Preview from './Preview';
 import {SubEditor} from './SubEditor';
 import {ScaffoldModal} from './ScaffoldModal';
-import {autobind} from '../util';
+import {autobind} from "core-decorators";
 import {BaseEventContext, BasicPanelItem, PluginEvent} from '../plugin';
 
 export default class MiniEditor extends Editor {
   constructor(props: EditorProps) {
     super(props);
     this.manager.on('build-panels', this.buildPanels as any);
-
-    this.buildPanels = this.buildPanels.bind(this);
   }
 
   componentWillUnmount() {
     this.manager.off('build-panels', this.buildPanels as any);
   }
 
-
+  @autobind
   buildPanels(event: PluginEvent<BaseEventContext>) {
     const panels: Array<BasicPanelItem> = event.context.data!;
 
@@ -32,41 +30,41 @@ export default class MiniEditor extends Editor {
 
   render() {
     const {preview, className, theme, data, isMobile, autoFocus, previewProps} =
-      this.props;
+        this.props;
 
     return (
-      <div
-        className={cx(
-          'ae-Editor',
-          {
-            preview: preview
-          },
-          className
-        )}
-      >
-        <div className="ae-Editor-inner" onContextMenu={this.handleContextMenu}>
-          <div className="ae-Main">
-            <Preview
-              {...previewProps}
-              isMobile={isMobile}
-              editable={!preview}
+        <div
+            className={cx(
+                'ae-Editor',
+                {
+                  preview: preview
+                },
+                className
+            )}
+        >
+          <div className="ae-Editor-inner" onContextMenu={this.handleContextMenu}>
+            <div className="ae-Main">
+              <Preview
+                  {...previewProps}
+                  isMobile={isMobile}
+                  editable={!preview}
+                  store={this.store}
+                  manager={this.manager}
+                  theme={theme}
+                  data={data}
+                  autoFocus={autoFocus}
+                  appLocale={this.props.appLocale}
+              ></Preview>
+            </div>
+          </div>
+
+          <SubEditor store={this.store} manager={this.manager} theme={theme} />
+          <ScaffoldModal
               store={this.store}
               manager={this.manager}
               theme={theme}
-              data={data}
-              autoFocus={autoFocus}
-              appLocale={this.props.appLocale}
-            ></Preview>
-          </div>
+          />
         </div>
-
-        <SubEditor store={this.store} manager={this.manager} theme={theme} />
-        <ScaffoldModal
-          store={this.store}
-          manager={this.manager}
-          theme={theme}
-        />
-      </div>
     );
   }
 }

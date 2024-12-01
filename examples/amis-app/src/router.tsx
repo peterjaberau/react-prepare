@@ -1,28 +1,26 @@
 // src/Router.tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import App from "./App"
-import Page from "./Page"
-import Example from "./Example"
-// import Editor from "./try-amis/editor";
+import RouterWrapper from "./router-wrapper"
 import { DynamicEditor } from "@/amis/dynamic-editor.tsx"
-// import {PreviewRenderer} from "@/try-amis/preview.tsx";
-// import AppEditor from "@/try-amis/examples/index.tsx";
+import { DynamicEditorRefactor } from "@/amis/dynamic-editor-refactor.tsx"
+import DynamicComponents from "@/amis/dynamic-components.tsx"
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/page" element={<Page />} />
-        <Route path="/example" element={<Example />} />
-        <Route path="/editor/:id" element={<DynamicEditor />} />
-        {/*<Route path="/editor" element={<Editor />} />*/}
-        {/*<Route path="/editor/:id" element={<DynamicEditor />} />*/}
-        {/*<Route path="/preview" element={<PreviewRenderer />} />*/}
-        {/*<Route path="/examples" element={<AppEditor />} />*/}
+        <Route path="/pages" element={<RouterWrapper />}>
+          <Route path="editor/:id" element={<DynamicEditor />} />
+          <Route path="editor-refactor/:id" element={<DynamicEditorRefactor />} />
+          <Route path="components/:id" element={<DynamicComponents />} />
+        </Route>
+        <Route path="/components" element={<RouterWrapper />}>
+          <Route path=":id" element={<DynamicComponents />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
 }
-
 export default Router

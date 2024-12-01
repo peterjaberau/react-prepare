@@ -8,7 +8,14 @@ const monacoEditorPluginDefault = (monacoEditorPlugin as any).default as (option
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [
+          ["@babel/plugin-proposal-decorators", { "legacy": true }],
+        ]
+      }
+    }),
+
     svgr({
       exportAsDefault: true,
       svgrOptions: {
@@ -27,8 +34,8 @@ export default defineConfig({
     },
   },
   server: {
-    host: "0.0.0.0",
-    // port: 58760,
+    // host: "0.0.0.0",
+    port: 4000,
     // open: false,
     // cors: true,
     // hmr: true,

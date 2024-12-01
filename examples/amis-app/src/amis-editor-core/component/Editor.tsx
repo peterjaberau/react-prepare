@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import cx from 'classnames';
 import Preview from './Preview';
-import {autobind} from '../util';
+import {autobind} from 'core-decorators';
 import {MainStore, EditorStoreType} from '../store/editor';
 import {EditorManager, EditorManagerConfig, PluginClass} from '../manager';
 import {reaction} from 'mobx';
@@ -36,19 +36,14 @@ export interface EditorProps extends PluginEventListener {
   $schemaUrl?: string;
   schemas?: Array<any>;
   theme?: string;
-
   toolbarMode?: 'default' | 'mini';
-
   noDialog?: boolean;
-
   appLocale?: string;
-
   i18nEnabled?: boolean;
   showCustomRenderersPanel?: boolean;
   amisDocHost?: string;
   superEditorData?: any;
   withSuperDataSchema?: boolean;
-
   hostManager?: EditorManager;
   hostNode?: EditorNodeType;
   dataBindingChange?: (
@@ -56,21 +51,12 @@ export interface EditorProps extends PluginEventListener {
     data: any,
     manager?: EditorManager
   ) => void;
-
-
   schemaFilter?: (schema: any, isPreview?: boolean) => any;
   amisEnv?: RenderOptions;
-
-
   ctx?: any;
   data?: any;
-
-
   disableBultinPlugin?: boolean;
-
-
   scene?: string;
-
   disablePluginList?:
     | Array<string>
     | ((id: string, plugin: PluginClass) => boolean);
@@ -79,39 +65,25 @@ export interface EditorProps extends PluginEventListener {
     | PluginClass
     | [PluginClass, Record<string, any> | (() => Record<string, any>)]
   >;
-
-
   previewProps?: any;
-
   isHiddenProps?: (key: string) => boolean;
-
-
   actionOptions?: {
-
     showOldEntry?: boolean;
-
     actionTreeGetter?: (
       actionTree: RendererPluginAction[]
     ) => RendererPluginAction[];
-
     customActionGetter?: (manager: EditorManager) => {
       [propName: string]: RendererPluginAction;
     };
-
     globalEventGetter?: (manager: EditorManager) => IGlobalEvent[];
   };
 
-
   variables?: VariableGroup[];
-
   variableOptions?: VariableOptions;
-
   onUndo?: () => void;
   onRedo?: () => void;
   onSave?: () => void;
   onPreview?: (preview: boolean) => void;
-
-
   onFormulaEditorOpen?: (
     node: EditorNodeType,
     manager: EditorManager,
@@ -123,7 +95,6 @@ export interface EditorProps extends PluginEventListener {
   ) => Promise<void | boolean>;
 
   getHostNodeDataSchema?: () => Promise<any>;
-
   getAvaiableContextFields?: (node: EditorNodeType) => Promise<any>;
   readonly?: boolean;
 }
@@ -188,6 +159,8 @@ export default class Editor extends Component<EditorProps> {
     }
 
 
+
+
     document.addEventListener('keydown', this.handleKeyDown);
 
     window.addEventListener('message', this.handleMessage, false);
@@ -209,10 +182,6 @@ export default class Editor extends Component<EditorProps> {
       this.manager.on('preview2editor', () => this.manager.rebuild())
     );
 
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMessage = this.handleMessage.bind(this);
-    this.handleContextMenu = this.handleContextMenu.bind(this);
-    this.getToolbarContainer = this.getToolbarContainer.bind(this);
   }
 
   componentDidMount() {
@@ -264,7 +233,7 @@ export default class Editor extends Component<EditorProps> {
     setTimeout(() => destroy(this.store), 4);
   }
 
-
+  @autobind
   handleKeyDown(e: KeyboardEvent) {
 
     if (this.props.isSubEditor) {
@@ -407,6 +376,7 @@ export default class Editor extends Component<EditorProps> {
     }
   }
 
+  @autobind
   handleMessage(event: any) {
     if (!event.data) {
       return;
@@ -424,7 +394,7 @@ export default class Editor extends Component<EditorProps> {
     }
   }
 
-
+  @autobind
   async handleContextMenu(e: React.MouseEvent<HTMLElement>) {
     e.persist();
     await closeContextMenus();
@@ -549,6 +519,7 @@ export default class Editor extends Component<EditorProps> {
     }
   }
 
+  @autobind
   getToolbarContainer() {
     return this.mainRef.current;
   }
