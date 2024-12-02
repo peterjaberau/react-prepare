@@ -14,10 +14,49 @@ import {
   HelpPanel,
   Drawer,
   TopNavigation,
-  Autosuggest
+  Autosuggest,
+  SideNavigation,
 } from "@cloudscape-design/components"
+import { Board, BoardItem } from '@cloudscape-design/board-components';
 
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+
+const initialSettings = {
+  sideNavigation: {
+    header: {
+      text: "Side Navigation",
+    },
+    items: [
+      { type: "link", text: "right-panels", href: "/components/right-panels" },
+      { type: "link", text: "renderers-panel", href: "/components/renderers-panel" },
+      { type: "link", text: "schema-form", href: "/components/schema-form" },
+      { type: "link", text: "back-top", href: "/components/back-top" },
+      { type: "link", text: "error-renderer", href: "/components/error-renderer" },
+      { type: "link", text: "search-custom-renderer-panel", href: "/components/search-custom-renderer-panel" },
+      { type: "link", text: "search-panel", href: "/components/search-panel" },
+      {
+        type: "section",
+        text: "Section 1",
+        items: [
+          { type: "link", text: "Page 4", href: "#/page4" },
+          { type: "link", text: "Page 5", href: "#/page5" },
+          { type: "link", text: "Page 6", href: "#/page6" },
+        ],
+      },
+      {
+        type: "section",
+        text: "Section 2",
+        items: [
+          { type: "link", text: "Page 7", href: "#/page7" },
+          { type: "link", text: "Page 8", href: "#/page8" },
+          { type: "link", text: "Page 9", href: "#/page9" },
+        ],
+      },
+    ],
+  },
+}
 
 // const { Header, Footer, Sider, Content } = Layout;
 
@@ -27,12 +66,60 @@ const RouterWrapper = () => {
   const [navigationOpen, setNavigationOpen] = React.useState(true)
   const [activeDrawerId, setActiveDrawerId] = React.useState<string | null>(null)
 
+
+  const [items, setItems] = React.useState<any>([
+
+
+    {
+      id: 'board-item-1',
+      definition: {},
+      columnSpan: 1,
+      rowSpan: 5,
+      data: {
+        title: 'board-item-1',
+        description: '',
+        content: (
+          <>
+            board-item-1 content
+            {/*<RenderFormulePart as={'SchemaPreview'} />*/}
+          </>
+        ),
+      },
+    },
+
+    {
+      id: 'board-item-2',
+      definition: {},
+      columnSpan: 3,
+      rowSpan: 5,
+      data: {
+        title: 'board-item-2',
+        description: '',
+        content: (
+          <>
+            board-item-2 content
+            {/*<RenderFormulePart as={'FormPreview'} />*/}
+          </>
+        ),
+      },
+    },
+
+  ]);
+
+
+  const navigate = useNavigate()
+  function followLink(e: CustomEvent) {
+    e.preventDefault()
+    navigate(e.detail.href)
+  }
+
   return (
     <>
       <RenderTopNavigation />
       <AppLayout
         navigation={
           <>
+            <SideNavigation {...(initialSettings.sideNavigation as any)} onFollow={followLink} />
             <HelpPanel header={"SidePanel"}>{<RouterNav />}</HelpPanel>
           </>
         }
@@ -43,6 +130,7 @@ const RouterWrapper = () => {
         contentType="default"
         content={
           <ContentLayout
+            defaultPadding={true}
             header={
               <Box margin={{ top: "s" }}>
                 <Header
@@ -63,9 +151,20 @@ const RouterWrapper = () => {
               </Box>
             }
           >
-            <PageContainer>
-              <RouterViewers />
-            </PageContainer>
+            <RouterViewers />
+            {/*<Board*/}
+            {/*  items={items}*/}
+            {/*  renderItem={(item) => (*/}
+            {/*    <BoardItem header={<Header>{item.data.title}</Header>} i18nStrings={boardItemI18nStrings}>*/}
+            {/*      {item.data.content}*/}
+            {/*    </BoardItem>*/}
+            {/*  )}*/}
+            {/*  onItemsChange={(event) => setItems(event.detail.items)}*/}
+            {/*  empty="empty"*/}
+            {/*/>*/}
+            {/*<PageContainer>*/}
+            {/*  <RouterViewers />*/}
+            {/*</PageContainer>*/}
           </ContentLayout>
         }
         splitPanel={splitPanelOpen && <SplitPanel header="Splitter">splitter</SplitPanel>}
@@ -143,7 +242,7 @@ const RouterWrapper = () => {
 }
 
 const RenderTopNavigation = () => {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState("")
 
   return (
     <div id="h">
@@ -226,23 +325,18 @@ const RenderTopNavigation = () => {
                   { value: "Suggestion 1" },
                   { value: "Suggestion 2" },
                   { value: "Suggestion 3" },
-                  { value: "Suggestion 4" }
-                ]
+                  { value: "Suggestion 4" },
+                ],
               },
               {
                 label: "Group 2",
-                options: [
-                  { value: "Suggestion 5" },
-                  { value: "Suggestion 6" },
-                  { value: "Suggestion 7" }
-                ]
-              }
+                options: [{ value: "Suggestion 5" }, { value: "Suggestion 6" }, { value: "Suggestion 7" }],
+              },
             ]}
             ariaLabel="Autosuggest example with suggestions groups"
             placeholder="Enter value"
             empty="No matches found"
           />
-
         }
       />
     </div>
