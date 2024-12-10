@@ -1,0 +1,87 @@
+[
+  {
+    "key": "renderers",
+    "icon": "png-icon renderers-png",
+    "title": {
+      "type": "span",
+      "key": null,
+      "ref": null,
+      "props": {
+        "className": "editor-tab-icon",
+        "editor-tooltip": "组件",
+        "children": {
+          "key": null,
+          "ref": null,
+          "props": {
+            "icon": "editor-renderer"
+          },
+          "_owner": null,
+          "_store": {}
+        }
+      },
+      "_owner": null,
+      "_store": {}
+    },
+    "position": "left",
+    "order": -9999
+  },
+  {
+    "key": "outline",
+    "icon": "png-icon outline-png",
+    "title": {
+      "type": "span",
+      "key": null,
+      "ref": null,
+      "props": {
+        "className": "editor-tab-icon",
+        "editor-tooltip": "大纲",
+        "children": {
+          "key": null,
+          "ref": null,
+          "props": {
+            "icon": "editor-outline"
+          },
+          "_owner": null,
+          "_store": {}
+        }
+      },
+      "_owner": null,
+      "_store": {}
+    },
+    "position": "left",
+    "order": 4000
+  },
+  {
+    "key": "code",
+    "icon": "png-icon code-png",
+    "title": {
+      "type": "span",
+      "key": null,
+      "ref": null,
+      "props": {
+        "className": "editor-tab-icon",
+        "editor-tooltip": "代码",
+        "children": {
+          "key": null,
+          "ref": null,
+          "props": {
+            "icon": "editor-code"
+          },
+          "_owner": null,
+          "_store": {}
+        }
+      },
+      "_owner": null,
+      "_store": {}
+    },
+    "position": "left",
+    "order": 5000
+  },
+  {
+    "key": "insertRenderer",
+    "icon": "fa fa-bolt",
+    "position": "left",
+    "title": "插入组件面板",
+    "order": 9999
+  }
+]

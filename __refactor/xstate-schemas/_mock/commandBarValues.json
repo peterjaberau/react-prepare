@@ -1,0 +1,253 @@
+{
+  "v1": {
+    "PLATFORMS": ["both", "web", "desktop"],
+    "INPUT_TYPES": ["options", "string", "text", "kcl", "selection", "boolean"],
+    "KclExpression": {
+      "valueAst": "Expr",
+      "valueText": "string",
+      "valueCalculated": "string"
+    },
+    "KclExpressionWithVariable": {
+      "valueAst": "Expr",
+      "valueText": "string",
+      "valueCalculated": "string",
+      "variableName": "string",
+      "variableDeclarationAst": "Node<VariableDeclaration>",
+      "variableIdentifierAst": "Node<Identifier>",
+      "insertIndex": "number"
+    },
+    "KclCommandValue": ["KclExpression", "KclExpressionWithVariable"],
+    "CommandInputType": ["options", "string", "text", "kcl", "selection", "boolean"],
+    "StateMachineCommandSetSchema": {
+      "EventType": "Record<string, any>"
+    },
+    "StateMachineCommandSet": {
+      "EventType": "Command"
+    },
+    "StateMachineCommandSetConfig": {
+      "EventType": ["CommandConfig", "CommandConfig[]"]
+    },
+    "Command": {
+      "name": "EventFrom<T>['type']",
+      "groupId": "T['id']",
+      "needsReview": "boolean",
+      "reviewMessage": ["string", "ReactNode", "function"],
+      "onSubmit": "function",
+      "onCancel": "function",
+      "args": "Record<string, CommandArgument>",
+      "displayName": "string",
+      "description": "string",
+      "icon": "CustomIconName",
+      "hide": ["both", "web", "desktop"]
+    },
+    "CommandConfig": {
+      "needsReview": "boolean",
+      "status": ["active", "development", "inactive"],
+      "args": "Record<string, CommandArgumentConfig>"
+    },
+    "CommandArgumentConfig": {
+      "description": "string",
+      "required": ["boolean", "function"],
+      "warningMessage": "string",
+      "skip": "boolean",
+      "valueSummary": "function",
+      "inputType": ["options", "selection", "kcl", "string", "text", "boolean"],
+      "options": ["CommandArgumentOption[]", "function"],
+      "optionsFromContext": "function",
+      "defaultValue": ["unknown", "function"],
+      "defaultValueFromContext": "function",
+      "selectionTypes": "Artifact['type'][]",
+      "multiple": "boolean"
+    },
+    "CommandArgument": {
+      "description": "string",
+      "required": ["boolean", "function"],
+      "skip": "boolean",
+      "machineActor": "Actor<T>",
+      "warningMessage": "string",
+      "valueSummary": "function",
+      "inputType": ["options", "selection", "kcl", "string", "text", "boolean"],
+      "options": ["CommandArgumentOption[]", "function"],
+      "defaultValue": ["unknown", "function"],
+      "selectionTypes": "Artifact['type'][]",
+      "multiple": "boolean"
+    },
+    "CommandArgumentWithName": {
+      "name": "string",
+      "description": "string",
+      "required": ["boolean", "function"],
+      "skip": "boolean",
+      "machineActor": "Actor<T>",
+      "warningMessage": "string",
+      "valueSummary": "function",
+      "inputType": ["options", "selection", "kcl", "string", "text", "boolean"],
+      "options": ["CommandArgumentOption[]", "function"],
+      "defaultValue": ["unknown", "function"],
+      "selectionTypes": "Artifact['type'][]",
+      "multiple": "boolean"
+    },
+    "CommandArgumentOption": {
+      "name": "string",
+      "isCurrent": "boolean",
+      "disabled": "boolean",
+      "value": "unknown"
+    }
+  },
+  "v2": {
+    "PLATFORMS": ["both", "web", "desktop"],
+    "INPUT_TYPES": ["options", "string", "text", "kcl", "selection", "boolean"],
+    "KclExpression": {
+      "valueAst": "Expr",
+      "valueText": "string",
+      "valueCalculated": "string"
+    },
+    "KclExpressionWithVariable": {
+      "valueAst": "Expr",
+      "valueText": "string",
+      "valueCalculated": "string",
+      "variableName": "string",
+      "variableDeclarationAst": {
+        "type": "VariableDeclaration",
+        "declarations": ["Identifier"]
+      },
+      "variableIdentifierAst": {
+        "type": "Identifier",
+        "name": "string"
+      },
+      "insertIndex": "number"
+    },
+    "KclCommandValue": ["KclExpression", "KclExpressionWithVariable"],
+    "CommandInputType": ["options", "string", "text", "kcl", "selection", "boolean"],
+    "StateMachineCommandSetSchema": {
+      "EventType": {
+        "key": "value"
+      }
+    },
+    "StateMachineCommandSet": {
+      "EventType": {
+        "name": "string",
+        "groupId": "string",
+        "args": {
+          "arg1": {
+            "required": true,
+            "defaultValue": "default",
+            "inputType": "string",
+            "options": ["option1", "option2"],
+            "skip": false
+          }
+        }
+      }
+    },
+    "StateMachineCommandSetConfig": {
+      "EventType": [
+        {
+          "name": "string",
+          "groupId": "string",
+          "args": {
+            "arg1": {
+              "required": true,
+              "defaultValue": "default",
+              "inputType": "string",
+              "options": ["option1", "option2"],
+              "skip": false
+            }
+          }
+        }
+      ]
+    },
+    "Command": {
+      "name": ["value1", "value2"],
+      "groupId": ["group1", "group2"],
+      "needsReview": "boolean",
+      "reviewMessage": ["string", "ReactNode", "function"],
+      "onSubmit": "function",
+      "onCancel": "function",
+      "args": {
+        "arg1": {
+          "required": true,
+          "defaultValue": "default",
+          "inputType": "string",
+          "options": ["option1", "option2"],
+          "skip": false
+        }
+      },
+      "displayName": "string",
+      "description": "string",
+      "icon": "CustomIconName",
+      "hide": ["both", "web", "desktop"]
+    },
+    "CommandConfig": {
+      "needsReview": "boolean",
+      "status": ["active", "development", "inactive"],
+      "args": {
+        "arg1": {
+          "description": "string",
+          "required": true,
+          "warningMessage": "string",
+          "skip": false,
+          "valueSummary": "function",
+          "inputType": ["options", "selection", "kcl", "string", "text", "boolean"],
+          "options": ["option1", "option2"],
+          "optionsFromContext": "function",
+          "defaultValue": "default",
+          "defaultValueFromContext": "function",
+          "selectionTypes": ["type1", "type2"],
+          "multiple": false
+        }
+      }
+    },
+    "CommandArgumentConfig": {
+      "description": "string",
+      "required": true,
+      "warningMessage": "string",
+      "skip": false,
+      "valueSummary": "function",
+      "inputType": ["options", "selection", "kcl", "string", "text", "boolean"],
+      "options": ["option1", "option2"],
+      "optionsFromContext": "function",
+      "defaultValue": "default",
+      "defaultValueFromContext": "function",
+      "selectionTypes": ["type1", "type2"],
+      "multiple": false
+    },
+    "CommandArgument": {
+      "description": "string",
+      "required": true,
+      "skip": false,
+      "machineActor": {
+        "type": "Actor",
+        "state": "state"
+      },
+      "warningMessage": "string",
+      "valueSummary": "function",
+      "inputType": ["options", "selection", "kcl", "string", "text", "boolean"],
+      "options": ["option1", "option2"],
+      "defaultValue": "default",
+      "selectionTypes": ["type1", "type2"],
+      "multiple": false
+    },
+    "CommandArgumentWithName": {
+      "name": "string",
+      "description": "string",
+      "required": true,
+      "skip": false,
+      "machineActor": {
+        "type": "Actor",
+        "state": "state"
+      },
+      "warningMessage": "string",
+      "valueSummary": "function",
+      "inputType": ["options", "selection", "kcl", "string", "text", "boolean"],
+      "options": ["option1", "option2"],
+      "defaultValue": "default",
+      "selectionTypes": ["type1", "type2"],
+      "multiple": false
+    },
+    "CommandArgumentOption": {
+      "name": "string",
+      "isCurrent": false,
+      "disabled": false,
+      "value": "unknown"
+    }
+  }
+}

@@ -1,0 +1,1191 @@
+{
+  "id": "e4f5e3ac-175c-44bc-a3b3-0895ba79b3b9",
+  "rootNode": {
+    "id": "Command Bar",
+    "uniqueId": "tm7hewgb2nq",
+    "nodes": [
+      {
+        "id": "Command Bar.Closed",
+        "uniqueId": "b1c2bqeclbk",
+        "nodes": [],
+        "position": {
+          "x": 2254,
+          "y": 305
+        },
+        "data": {
+          "key": "Closed",
+          "exit": [],
+          "tags": [],
+          "entry": [],
+          "assets": [],
+          "invoke": []
+        },
+        "size": {
+          "width": 83,
+          "height": 42
+        }
+      },
+      {
+        "id": "Command Bar.Selecting command",
+        "uniqueId": "wtxv61zian",
+        "nodes": [],
+        "position": {
+          "x": 2619,
+          "y": 575
+        },
+        "data": {
+          "key": "Selecting command",
+          "exit": [],
+          "tags": [],
+          "entry": [],
+          "assets": [],
+          "invoke": [],
+          "metaEntries": []
+        },
+        "size": {
+          "width": 176,
+          "height": 42
+        }
+      },
+      {
+        "id": "Command Bar.Command selected",
+        "uniqueId": "jik6zlsnw5h",
+        "nodes": [],
+        "position": {
+          "x": 2318,
+          "y": 870
+        },
+        "data": {
+          "key": "Command selected",
+          "exit": [],
+          "tags": [],
+          "entry": [],
+          "assets": [],
+          "invoke": []
+        },
+        "size": {
+          "width": 172,
+          "height": 42
+        }
+      },
+      {
+        "id": "Command Bar.Gathering arguments",
+        "uniqueId": "qqd3ori78x",
+        "nodes": [
+          {
+            "id": "Command Bar.Gathering arguments.Awaiting input",
+            "uniqueId": "7h1vokxrwgd",
+            "nodes": [],
+            "position": {
+              "x": 1663,
+              "y": 1096
+            },
+            "data": {
+              "key": "Awaiting input",
+              "exit": [],
+              "tags": [],
+              "entry": [],
+              "assets": [],
+              "invoke": []
+            },
+            "size": {
+              "width": 136,
+              "height": 42
+            }
+          },
+          {
+            "id": "Command Bar.Gathering arguments.Validating",
+            "uniqueId": "tqo23fcoz4",
+            "nodes": [],
+            "position": {
+              "x": 1617,
+              "y": 1278
+            },
+            "data": {
+              "key": "Validating",
+              "exit": [],
+              "tags": [],
+              "entry": [],
+              "assets": [],
+              "invoke": [
+                {
+                  "input": {},
+                  "src": "Validate argument",
+                  "id": "validateSingleArgument",
+                  "kind": "named",
+                  "settings": {}
+                }
+              ]
+            },
+            "size": {
+              "width": 272,
+              "height": 153
+            }
+          }
+        ],
+        "position": {
+          "x": 1544,
+          "y": 1006
+        },
+        "data": {
+          "key": "Gathering arguments",
+          "exit": [],
+          "tags": [],
+          "entry": [],
+          "assets": [],
+          "invoke": [],
+          "initial": "Awaiting input"
+        },
+        "size": {
+          "width": 527,
+          "height": 42
+        }
+      },
+      {
+        "id": "Command Bar.Review",
+        "uniqueId": "k6dvpmtmgb",
+        "nodes": [],
+        "position": {
+          "x": 2700,
+          "y": 1674
+        },
+        "data": {
+          "key": "Review",
+          "exit": [],
+          "tags": [],
+          "entry": [
+            {
+              "kind": "named",
+              "action": {
+                "type": "Clear current argument",
+                "params": {}
+              }
+            }
+          ],
+          "assets": [],
+          "invoke": []
+        },
+        "size": {
+          "width": 249,
+          "height": 129
+        }
+      },
+      {
+        "id": "Command Bar.Checking Arguments",
+        "uniqueId": "e4eol2njljg",
+        "nodes": [],
+        "position": {
+          "x": 1642,
+          "y": 667
+        },
+        "data": {
+          "key": "Checking Arguments",
+          "exit": [],
+          "tags": [],
+          "entry": [],
+          "assets": [],
+          "invoke": [
+            {
+              "input": {},
+              "src": "Validate all arguments",
+              "id": "validateArguments",
+              "kind": "named",
+              "settings": {}
+            }
+          ]
+        },
+        "size": {
+          "width": 243,
+          "height": 153
+        }
+      }
+    ],
+    "position": {
+      "x": 605,
+      "y": 12
+    },
+    "data": {
+      "key": "Command Bar",
+      "exit": [],
+      "tags": [],
+      "entry": [],
+      "assets": [],
+      "invoke": [],
+      "initial": "Closed"
+    },
+    "size": {
+      "width": 2694,
+      "height": 155
+    }
+  },
+  "schemas": {
+    "tags": {},
+    "input": null,
+    "actors": {},
+    "delays": {},
+    "events": {
+      "Open": {
+        "type": "object",
+        "properties": {}
+      },
+      "Clear": {
+        "type": "object",
+        "properties": {}
+      },
+      "Close": {
+        "type": "object",
+        "properties": {}
+      },
+      "Add argument": {
+        "type": "object",
+        "properties": {}
+      },
+      "Add commands": {
+        "type": "object",
+        "properties": {}
+      },
+      "Edit argument": {
+        "type": "object",
+        "properties": {}
+      },
+      "Select command": {
+        "type": "object",
+        "properties": {}
+      },
+      "Submit command": {
+        "type": "object",
+        "properties": {}
+      },
+      "Remove argument": {
+        "type": "object",
+        "properties": {}
+      },
+      "Remove commands": {
+        "type": "object",
+        "properties": {}
+      },
+      "Submit argument": {
+        "type": "object",
+        "properties": {}
+      },
+      "Deselect command": {
+        "type": "object",
+        "properties": {}
+      },
+      "Set machine manager": {
+        "type": "object",
+        "properties": {}
+      },
+      "Change current argument": {
+        "type": "object",
+        "properties": {}
+      },
+      "Find and select command": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "guards": {},
+    "output": null,
+    "actions": {},
+    "context": {
+      "commands": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Generated automatically based on the key: \"commands\" in initial context values"
+      },
+      "machineManager": {
+        "type": "object",
+        "properties": {},
+        "description": "Generated automatically based on the key: \"machineManager\" in initial context values"
+      },
+      "selectionRanges": {
+        "type": "object",
+        "properties": {},
+        "description": "Generated automatically based on the key: \"selectionRanges\" in initial context values"
+      },
+      "argumentsToSubmit": {
+        "type": "object",
+        "properties": {},
+        "description": "Generated automatically based on the key: \"argumentsToSubmit\" in initial context values"
+      }
+    }
+  },
+  "context": {
+    "commands": [],
+    "machineManager": {
+      "machines": [],
+      "machineApiIp": null,
+      "currentMachine": null
+    },
+    "selectionRanges": {
+      "otherSelections": [],
+      "codeBasedSelections": []
+    },
+    "argumentsToSubmit": {}
+  },
+  "edges": [
+    {
+      "id": "Command Bar.Closed#Open[0]",
+      "uniqueId": "7tvydduc0cv",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Open"
+        },
+        "actions": []
+      },
+      "source": "Command Bar.Closed",
+      "target": "Command Bar.Selecting command",
+      "position": {
+        "x": 2670,
+        "y": 441
+      },
+      "size": {
+        "width": 73,
+        "height": 40
+      }
+    },
+    {
+      "id": "Command Bar.Closed#Find and select command[0]",
+      "uniqueId": "bhd2xsfclv5",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Find and select command"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Find and select command",
+              "params": {}
+            }
+          },
+          {
+            "kind": "named",
+            "action": {
+              "type": "Initialize arguments to submit",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Closed",
+      "target": "Command Bar.Command selected",
+      "position": {
+        "x": 2154,
+        "y": 397
+      },
+      "size": {
+        "width": 282,
+        "height": 128
+      }
+    },
+    {
+      "id": "Command Bar.Closed#Add commands[0]",
+      "uniqueId": "7wfwct5mm89",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Add commands"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "inline:Command Bar.Closed#Add commands[-1]#transition[0]",
+              "params": {}
+            }
+          }
+        ],
+        "internal": true
+      },
+      "source": "Command Bar.Closed",
+      "target": "Command Bar.Closed",
+      "position": {
+        "x": 3055,
+        "y": 397
+      },
+      "size": {
+        "width": 196,
+        "height": 116
+      }
+    },
+    {
+      "id": "Command Bar.Closed#Remove commands[0]",
+      "uniqueId": "9hko6raq4ta",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Remove commands"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "inline:Command Bar.Closed#Remove commands[-1]#transition[0]",
+              "params": {}
+            }
+          }
+        ],
+        "internal": true
+      },
+      "source": "Command Bar.Closed",
+      "target": "Command Bar.Closed",
+      "position": {
+        "x": 653,
+        "y": 397
+      },
+      "size": {
+        "width": 196,
+        "height": 116
+      }
+    },
+    {
+      "id": "Command Bar.Selecting command#Select command[0]",
+      "uniqueId": "0y3n01r5j9k",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Select command"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Set selected command",
+              "params": {}
+            }
+          },
+          {
+            "kind": "named",
+            "action": {
+              "type": "Initialize arguments to submit",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Selecting command",
+      "target": "Command Bar.Command selected",
+      "position": {
+        "x": 2306,
+        "y": 680
+      },
+      "size": {
+        "width": 282,
+        "height": 128
+      }
+    },
+    {
+      "id": "Command Bar.Command selected#always[0]",
+      "uniqueId": "zgexnq3gqhr",
+      "data": {
+        "eventTypeData": {
+          "type": "always"
+        },
+        "guard": {
+          "kind": "named",
+          "type": "Command has no arguments",
+          "params": {}
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Execute command",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Command selected",
+      "target": "Command Bar.Closed",
+      "position": {
+        "x": 1819,
+        "y": 422
+      },
+      "size": {
+        "width": 285,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar.Command selected#always[1]",
+      "uniqueId": "jb7hb4i0bn",
+      "data": {
+        "eventTypeData": {
+          "type": "always"
+        },
+        "guard": {
+          "kind": "named",
+          "type": "All arguments are skippable",
+          "params": {}
+        },
+        "actions": []
+      },
+      "source": "Command Bar.Command selected",
+      "target": "Command Bar.Checking Arguments",
+      "position": {
+        "x": 1555,
+        "y": 576
+      },
+      "size": {
+        "width": 313,
+        "height": 40
+      }
+    },
+    {
+      "id": "Command Bar.Command selected#always[2]",
+      "uniqueId": "4xjp616hkjn",
+      "data": {
+        "eventTypeData": {
+          "type": "always"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Set current argument to first non-skippable",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Command selected",
+      "target": "Command Bar.Gathering arguments",
+      "position": {
+        "x": 1203,
+        "y": 699
+      },
+      "size": {
+        "width": 389,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar.Gathering arguments.Awaiting input#Submit argument[0]",
+      "uniqueId": "xg67r6kd40f",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Submit argument"
+        },
+        "actions": []
+      },
+      "source": "Command Bar.Gathering arguments.Awaiting input",
+      "target": "Command Bar.Gathering arguments.Validating",
+      "position": {
+        "x": 1875,
+        "y": 1188
+      },
+      "size": {
+        "width": 148,
+        "height": 40
+      }
+    },
+    {
+      "id": "Command Bar.Gathering arguments.Validating#done.invoke.validateSingleArgument[0]",
+      "uniqueId": "lbki90dljg",
+      "data": {
+        "eventTypeData": {
+          "type": "invocation.done",
+          "invocationId": "validateSingleArgument"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "enqueueValidArgsToSubmit",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Gathering arguments.Validating",
+      "target": "Command Bar.Checking Arguments",
+      "position": {
+        "x": 1998,
+        "y": 870
+      },
+      "size": {
+        "width": 270,
+        "height": 85
+      }
+    },
+    {
+      "id": "Command Bar.Gathering arguments.Validating#error.platform.validateSingleArgument[0]",
+      "uniqueId": "wavvwnudddm",
+      "data": {
+        "eventTypeData": {
+          "type": "invocation.error",
+          "invocationId": "validateSingleArgument"
+        },
+        "actions": []
+      },
+      "source": "Command Bar.Gathering arguments.Validating",
+      "target": "Command Bar.Gathering arguments.Awaiting input",
+      "position": {
+        "x": 1592,
+        "y": 1190
+      },
+      "size": {
+        "width": 233,
+        "height": 35
+      }
+    },
+    {
+      "id": "Command Bar.Gathering arguments#Change current argument[0]",
+      "uniqueId": "yn5vmdv02p8",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Change current argument"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Set current argument",
+              "params": {}
+            }
+          }
+        ],
+        "internal": true
+      },
+      "source": "Command Bar.Gathering arguments",
+      "target": "Command Bar.Gathering arguments",
+      "position": {
+        "x": 2659,
+        "y": 1534
+      },
+      "size": {
+        "width": 230,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar.Gathering arguments#Deselect command[0]",
+      "uniqueId": "opq2oql85m",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Deselect command"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "inline:Command Bar.Gathering arguments#Deselect command[-1]#transition[0]",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Gathering arguments",
+      "target": "Command Bar.Selecting command",
+      "position": {
+        "x": 2638,
+        "y": 686
+      },
+      "size": {
+        "width": 196,
+        "height": 116
+      }
+    },
+    {
+      "id": "Command Bar.Review#Submit command[0]",
+      "uniqueId": "iuxjy0rf0l",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Submit command"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Execute command",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Review",
+      "target": "Command Bar.Closed",
+      "position": {
+        "x": 2793,
+        "y": 416
+      },
+      "size": {
+        "width": 212,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar.Review#Add argument[0]",
+      "uniqueId": "ktvql8rf51",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Add argument"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Set current argument",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Review",
+      "target": "Command Bar.Gathering arguments",
+      "position": {
+        "x": 1139,
+        "y": 1534
+      },
+      "size": {
+        "width": 230,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar.Review#Remove argument[0]",
+      "uniqueId": "b1v6s744uvp",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Remove argument"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Remove argument",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Review",
+      "target": "Command Bar.Review",
+      "position": {
+        "x": 2726,
+        "y": 1853
+      },
+      "size": {
+        "width": 210,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar.Review#Edit argument[0]",
+      "uniqueId": "vrj77nazjym",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Edit argument"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Set current argument",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Review",
+      "target": "Command Bar.Gathering arguments",
+      "position": {
+        "x": 1419,
+        "y": 1534
+      },
+      "size": {
+        "width": 230,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar.Checking Arguments#done.invoke.validateArguments[0]",
+      "uniqueId": "t7rmtj8sf2",
+      "data": {
+        "eventTypeData": {
+          "type": "invocation.done",
+          "invocationId": "validateArguments"
+        },
+        "guard": {
+          "kind": "named",
+          "type": "Command needs review",
+          "params": {}
+        },
+        "actions": []
+      },
+      "source": "Command Bar.Checking Arguments",
+      "target": "Command Bar.Review",
+      "position": {
+        "x": 911,
+        "y": 885
+      },
+      "size": {
+        "width": 433,
+        "height": 40
+      }
+    },
+    {
+      "id": "Command Bar.Checking Arguments#done.invoke.validateArguments[1]",
+      "uniqueId": "i024qpaq9hn",
+      "data": {
+        "eventTypeData": {
+          "type": "invocation.done",
+          "invocationId": "validateArguments"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Execute command",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Checking Arguments",
+      "target": "Command Bar.Closed",
+      "position": {
+        "x": 899,
+        "y": 416
+      },
+      "size": {
+        "width": 313,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar.Checking Arguments#error.platform.validateArguments[0]",
+      "uniqueId": "ynwp9r8tzxs",
+      "data": {
+        "eventTypeData": {
+          "type": "invocation.error",
+          "invocationId": "validateArguments"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Set current argument to first non-skippable",
+              "params": {}
+            }
+          }
+        ]
+      },
+      "source": "Command Bar.Checking Arguments",
+      "target": "Command Bar.Gathering arguments",
+      "position": {
+        "x": 1579,
+        "y": 870
+      },
+      "size": {
+        "width": 369,
+        "height": 85
+      }
+    },
+    {
+      "id": "Command Bar#Set machine manager[0]",
+      "uniqueId": "t59yredwrh",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Set machine manager"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Set machine manager",
+              "params": {}
+            }
+          }
+        ],
+        "internal": true
+      },
+      "source": "Command Bar",
+      "position": {
+        "x": 352,
+        "y": 52
+      },
+      "size": {
+        "width": 233,
+        "height": 90
+      }
+    },
+    {
+      "id": "Command Bar#Close[0]",
+      "uniqueId": "wi3e1asucqq",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Close"
+        },
+        "actions": []
+      },
+      "source": "Command Bar",
+      "target": "Command Bar.Closed",
+      "position": {
+        "x": 2258,
+        "y": 215
+      },
+      "size": {
+        "width": 75,
+        "height": 40
+      }
+    },
+    {
+      "id": "Command Bar#Clear[0]",
+      "uniqueId": "p5g6xyv21h",
+      "data": {
+        "eventTypeData": {
+          "type": "named",
+          "eventType": "Clear"
+        },
+        "actions": [
+          {
+            "kind": "named",
+            "action": {
+              "type": "Clear argument data",
+              "params": {}
+            }
+          }
+        ],
+        "internal": true
+      },
+      "source": "Command Bar",
+      "target": "Command Bar",
+      "position": {
+        "x": 107,
+        "y": 52
+      },
+      "size": {
+        "width": 225,
+        "height": 90
+      }
+    }
+  ],
+  "implementations": {
+    "actors": {
+      "Validate argument": {
+        "id": "Validate argument",
+        "kind": "named",
+        "name": "validateSingleArgument",
+        "type": "actor",
+        "input": {
+          "type": "object",
+          "properties": {}
+        },
+        "output": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Validate all arguments": {
+        "id": "Validate all arguments",
+        "kind": "named",
+        "name": "validateArguments",
+        "type": "actor",
+        "input": {
+          "type": "object",
+          "properties": {}
+        },
+        "output": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      }
+    },
+    "guards": {
+      "Command needs review": {
+        "id": "Command needs review",
+        "name": "Command needs review",
+        "type": "guard",
+        "params": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Command has no arguments": {
+        "id": "Command has no arguments",
+        "name": "Command has no arguments",
+        "type": "guard",
+        "params": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "All arguments are skippable": {
+        "id": "All arguments are skippable",
+        "name": "All arguments are skippable",
+        "type": "guard",
+        "params": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      }
+    },
+    "actions": {
+      "Execute command": {
+        "id": "Execute command",
+        "name": "Execute command",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Remove argument": {
+        "id": "Remove argument",
+        "name": "Remove argument",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Clear argument data": {
+        "id": "Clear argument data",
+        "name": "Clear argument data",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Set machine manager": {
+        "id": "Set machine manager",
+        "name": "Set machine manager",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Set current argument": {
+        "id": "Set current argument",
+        "name": "Set current argument",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Set selected command": {
+        "id": "Set selected command",
+        "name": "Set selected command",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Clear current argument": {
+        "id": "Clear current argument",
+        "name": "Clear current argument",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Find and select command": {
+        "id": "Find and select command",
+        "name": "Find and select command",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "enqueueValidArgsToSubmit": {
+        "id": "enqueueValidArgsToSubmit",
+        "name": "enqueueValidArgsToSubmit",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Initialize arguments to submit": {
+        "id": "Initialize arguments to submit",
+        "name": "Initialize arguments to submit",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "Set current argument to first non-skippable": {
+        "id": "Set current argument to first non-skippable",
+        "name": "Set current argument to first non-skippable",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "inline:Command Bar.Closed#Add commands[-1]#transition[0]": {
+        "id": "inline:Command Bar.Closed#Add commands[-1]#transition[0]",
+        "code": "export default assign({\"commands\":({ context, event }) => [...context.commands, ...event.data.commands].sort(sortCommands)})",
+        "name": "Unnamed assign",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "inline:Command Bar.Closed#Remove commands[-1]#transition[0]": {
+        "id": "inline:Command Bar.Closed#Remove commands[-1]#transition[0]",
+        "code": "export default assign({\"commands\":({ context, event }) => context.commands.filter((c) => !event.data.commands.some((c2) => c2.name === c.name && c2.groupId === c.groupId))})",
+        "name": "Unnamed assign",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      },
+      "inline:Command Bar.Gathering arguments#Deselect command[-1]#transition[0]": {
+        "id": "inline:Command Bar.Gathering arguments#Deselect command[-1]#transition[0]",
+        "code": "export default assign({\"selectedCommand\":(_c, _e) => undefined})",
+        "name": "Unnamed assign",
+        "type": "action",
+        "schema": {
+          "type": "object",
+          "properties": {}
+        },
+        "imports": []
+      }
+    }
+  }
+}

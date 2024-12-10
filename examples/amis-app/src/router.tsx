@@ -10,7 +10,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/app" element={<App />} />
+        <Route path="/home" element={<RouterWrapper />} />
         <Route path="/pages" element={<RouterWrapper />}>
           <Route path="editor/:id" element={<DynamicEditor />} />
           <Route path="editor-refactor/:id" element={<DynamicEditorRefactor />} />

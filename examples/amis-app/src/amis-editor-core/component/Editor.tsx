@@ -6,6 +6,7 @@ import {MainStore, EditorStoreType} from '../store/editor';
 import {EditorManager, EditorManagerConfig, PluginClass} from '../manager';
 import {reaction} from 'mobx';
 import {RenderOptions, closeContextMenus, toast} from 'amis';
+
 import {
   PluginEventListener,
   RendererPluginAction,

@@ -8,10 +8,11 @@ const RouterNav = () => {
   const openKeys = pathSnippets.length > 1 ? [pathSnippets[0]] : [];
   const selectedKeys = [location.pathname];
 
-
-
   return (
     <Menu mode="inline" defaultOpenKeys={openKeys} selectedKeys={selectedKeys}>
+      <Menu.Item key="app">
+        <Link to="/app">App</Link>
+      </Menu.Item>
       <Menu.Item key="home">
         <Link to="/">Home</Link>
       </Menu.Item>
@@ -23,33 +24,13 @@ const RouterNav = () => {
       </Menu.Item>
       <Menu.SubMenu key="components" title="Components">
         <Menu.Item key="right-panels">
-          <Link to="/components/right-panels">Right Panel</Link>
+          <Link to="/components/right-panel">Right Panel</Link>
         </Menu.Item>
         <Menu.Item key="renderers-panel">
           <Link to="/components/renderers-panel">renderers-panel</Link>
         </Menu.Item>
       </Menu.SubMenu>
     </Menu>
-
-    // <ul>
-    //   <li>
-    //     <Link to="/">Home</Link>
-    //   </li>
-    //   <li>
-    //     <Link to="/pages/editor/:id">Dynamic Editor</Link>
-    //   </li>
-    //   <li>
-    //     <Link to="/pages/editor-refactor/:id">Dynamic Editor Refactor</Link>
-    //   </li>
-    //   <li>Components</li>
-    //   <li>
-    //     <ul>
-    //       <li>
-    //         <Link to="/components/right-panels">Right Panel</Link>
-    //       </li>
-    //     </ul>
-    //   </li>
-    // </ul>
   )
 }
 

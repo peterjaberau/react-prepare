@@ -1,6 +1,12 @@
 import * as React from "react"
 import RouterNav from "./router-nav"
 import RouterViewers from "./router-viewer"
+// import { useRootMachine, useRootMachineState, useChildMachine, useChildMachineState } from "@/machines/useMyMachines.ts"
+
+import JsonView from "react18-json-view"
+import 'react18-json-view/src/style.css'
+// @ts-ignore
+
 import { ProLayout, ProCard, PageContainer } from "@ant-design/pro-components"
 import type { ProSettings } from "@ant-design/pro-components"
 import {
@@ -15,11 +21,10 @@ import {
   Drawer,
   TopNavigation,
   Autosuggest,
-  SideNavigation,
+  SideNavigation, ExpandableSection,
 } from "@cloudscape-design/components"
-import { Board, BoardItem } from '@cloudscape-design/board-components';
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 
@@ -29,7 +34,7 @@ const initialSettings = {
       text: "Side Navigation",
     },
     items: [
-      { type: "link", text: "right-panels", href: "/components/right-panels" },
+      { type: "link", text: "right-panel", href: "/components/right-panel" },
       { type: "link", text: "renderers-panel", href: "/components/renderers-panel" },
       { type: "link", text: "schema-form", href: "/components/schema-form" },
       { type: "link", text: "back-top", href: "/components/back-top" },
@@ -61,11 +66,11 @@ const initialSettings = {
 // const { Header, Footer, Sider, Content } = Layout;
 
 const RouterWrapper = () => {
+
   const [splitPanelOpen, setSplitPanelOpen] = useState(false)
   const [splitPanelPosition, setSplitPanelPosition] = useState<"side" | "bottom">("side")
   const [navigationOpen, setNavigationOpen] = React.useState(true)
-  const [activeDrawerId, setActiveDrawerId] = React.useState<string | null>(null)
-
+  const [activeDrawerId, setActiveDrawerId] = React.useState<string | null>('drawer-inspector')
 
   const [items, setItems] = React.useState<any>([
 
@@ -105,7 +110,6 @@ const RouterWrapper = () => {
     },
 
   ]);
-
 
   const navigate = useNavigate()
   function followLink(e: CustomEvent) {
@@ -206,7 +210,7 @@ const RouterWrapper = () => {
             },
           },
           {
-            id: "drawer-3",
+            id: "drawer-inspector",
             ariaLabels: {
               closeButton: "Close",
               drawerName: "Edit",
@@ -216,7 +220,14 @@ const RouterWrapper = () => {
             badge: false,
             resizable: true,
             defaultSize: 500,
-            content: <Drawer header="Example 3">Example 3 content</Drawer>,
+            content: <Drawer header="Inspectors">
+
+            test
+
+
+
+
+            </Drawer>,
             trigger: {
               iconName: "bug",
             },
@@ -226,18 +237,6 @@ const RouterWrapper = () => {
         activeDrawerId={activeDrawerId}
       />
     </>
-
-    // <Layout style={{ height: '100vh', overflow: 'hidden' }}>
-    //   <Layout.Sider style={{ background: token.colorBgContainer, overflow: 'auto' }}>
-    //     <RouterNav />
-    //   </Layout.Sider>
-    //   <Layout.Content style={{ overflow: 'auto' }}>
-    //
-    //     <div style={{ padding: "20px", height: '100vh' }}>
-    //       <RouterViewers />
-    //     </div>
-    //   </Layout.Content>
-    // </Layout>
   )
 }
 
@@ -344,3 +343,5 @@ const RenderTopNavigation = () => {
 }
 
 export default RouterWrapper
+
+

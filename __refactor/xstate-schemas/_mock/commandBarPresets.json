@@ -1,0 +1,504 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CommandBarMachine",
+    "type": "object",
+    "properties": {
+      "context": {
+        "type": "object",
+        "properties": {
+          "commands": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/Command" }
+          },
+          "selectedCommand": { "$ref": "#/definitions/Command" },
+          "currentArgument": { "$ref": "#/definitions/CommandArgumentWithName" },
+          "selectionRanges": { "$ref": "#/definitions/Selections__old" },
+          "argumentsToSubmit": {
+            "type": "object",
+            "additionalProperties": { "type": "unknown" }
+          },
+          "machineManager": { "$ref": "#/definitions/MachineManager" }
+        },
+        "required": ["commands", "selectionRanges", "argumentsToSubmit", "machineManager"]
+      },
+      "events": {
+        "type": "object",
+        "oneOf": [
+          { "type": "object", "properties": { "type": { "const": "Open" } } },
+          { "type": "object", "properties": { "type": { "const": "Close" } } },
+          { "type": "object", "properties": { "type": { "const": "Clear" } } },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Select command" },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "command": { "$ref": "#/definitions/Command" },
+                  "argDefaultValues": {
+                    "type": "object",
+                    "additionalProperties": { "type": "unknown" }
+                  }
+                },
+                "required": ["command"]
+              }
+            }
+          },
+          { "type": "object", "properties": { "type": { "const": "Deselect command" } } },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Submit command" },
+              "output": {
+                "type": "object",
+                "additionalProperties": { "type": "unknown" }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Add argument" },
+              "data": { "$ref": "#/definitions/CommandArgumentWithName" }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Remove argument" },
+              "data": {
+                "type": "object",
+                "additionalProperties": { "$ref": "#/definitions/CommandArgumentWithName" }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Edit argument" },
+              "data": { "$ref": "#/definitions/CommandArgumentWithName" }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Add commands" },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "commands": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Command" }
+                  }
+                },
+                "required": ["commands"]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Remove commands" },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "commands": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Command" }
+                  }
+                },
+                "required": ["commands"]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Submit argument" },
+              "data": {
+                "type": "object",
+                "additionalProperties": { "type": "unknown" }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "xstate.done.actor.validateSingleArgument" },
+              "output": {
+                "type": "object",
+                "additionalProperties": { "type": "unknown" }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "xstate.done.actor.validateArguments" },
+              "output": {
+                "type": "object",
+                "additionalProperties": { "type": "unknown" }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "xstate.error.actor.validateArguments" },
+              "error": {
+                "type": "object",
+                "properties": {
+                  "message": { "type": "string" },
+                  "arg": { "$ref": "#/definitions/CommandArgumentWithName" }
+                },
+                "required": ["message", "arg"]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Find and select command" },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "groupId": { "type": "string" },
+                  "argDefaultValues": {
+                    "type": "object",
+                    "additionalProperties": { "type": "unknown" }
+                  }
+                },
+                "required": ["name", "groupId"]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Change current argument" },
+              "data": {
+                "type": "object",
+                "additionalProperties": { "$ref": "#/definitions/CommandArgumentWithName" }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": { "const": "Set machine manager" },
+              "data": { "$ref": "#/definitions/MachineManager" }
+            }
+          }
+        ]
+      }
+    },
+    "required": ["context", "events"],
+    "definitions": {
+      "Command": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "groupId": { "type": "string" },
+          "args": {
+            "type": "object",
+            "additionalProperties": { "$ref": "#/definitions/CommandArgument" }
+          },
+          "onSubmit": { "type": "function" },
+          "needsReview": { "type": "boolean" }
+        },
+        "required": ["name", "groupId"]
+      },
+      "CommandArgument": {
+        "type": "object",
+        "properties": {
+          "required": { "type": ["boolean", "function"] },
+          "defaultValue": { "type": ["unknown", "function"] },
+          "inputType": { "type": "string" },
+          "options": { "type": ["array", "function"] },
+          "skip": { "type": "boolean" }
+        }
+      },
+      "CommandArgumentWithName": {
+        "allOf": [
+          { "$ref": "#/definitions/CommandArgument" },
+          {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" }
+            },
+            "required": ["name"]
+          }
+        ]
+      },
+      "Selections__old": {
+        "type": "object",
+        "properties": {
+          "otherSelections": {
+            "type": "array",
+            "items": { "type": "unknown" }
+          },
+          "codeBasedSelections": {
+            "type": "array",
+            "items": { "type": "unknown" }
+          }
+        },
+        "required": ["otherSelections", "codeBasedSelections"]
+      },
+      "MachineManager": {
+        "type": "object",
+        "properties": {
+          "machines": {
+            "type": "array",
+            "items": { "type": "unknown" }
+          },
+          "machineApiIp": { "type": ["string", "null"] },
+          "currentMachine": { "type": ["unknown", "null"] },
+          "setCurrentMachine": { "type": "function" },
+          "noMachinesReason": { "type": "function" }
+        },
+        "required": ["machines", "setCurrentMachine", "noMachinesReason"]
+      }
+    }
+  },
+  "context": {
+    "commands": [
+      {
+        "name": "exampleCommand",
+        "groupId": "exampleGroup",
+        "args": {
+          "arg1": {
+            "required": true,
+            "defaultValue": "default",
+            "inputType": "string",
+            "options": ["option1", "option2"],
+            "skip": false
+          }
+        },
+        "onSubmit": "function",
+        "needsReview": false
+      }
+    ],
+    "selectedCommand": {
+      "name": "exampleCommand",
+      "groupId": "exampleGroup",
+      "args": {
+        "arg1": {
+          "required": true,
+          "defaultValue": "default",
+          "inputType": "string",
+          "options": ["option1", "option2"],
+          "skip": false
+        }
+      },
+      "onSubmit": "function",
+      "needsReview": false
+    },
+    "currentArgument": {
+      "name": "arg1",
+      "required": true,
+      "defaultValue": "default",
+      "inputType": "string",
+      "options": ["option1", "option2"],
+      "skip": false
+    },
+    "selectionRanges": {
+      "otherSelections": [],
+      "codeBasedSelections": []
+    },
+    "argumentsToSubmit": {
+      "arg1": "value"
+    },
+    "machineManager": {
+      "machines": [],
+      "machineApiIp": null,
+      "currentMachine": null,
+      "setCurrentMachine": "function",
+      "noMachinesReason": "function"
+    }
+  },
+  "events": [
+    { "type": "Open" },
+    { "type": "Close" },
+    { "type": "Clear" },
+    {
+      "type": "Select command",
+      "data": {
+        "command": {
+          "name": "exampleCommand",
+          "groupId": "exampleGroup",
+          "args": {
+            "arg1": {
+              "required": true,
+              "defaultValue": "default",
+              "inputType": "string",
+              "options": ["option1", "option2"],
+              "skip": false
+            }
+          },
+          "onSubmit": "function",
+          "needsReview": false
+        },
+        "argDefaultValues": {
+          "arg1": "default"
+        }
+      }
+    },
+    { "type": "Deselect command" },
+    {
+      "type": "Submit command",
+      "output": {
+        "arg1": "value"
+      }
+    },
+    {
+      "type": "Add argument",
+      "data": {
+        "argument": {
+          "name": "arg1",
+          "required": true,
+          "defaultValue": "default",
+          "inputType": "string",
+          "options": ["option1", "option2"],
+          "skip": false
+        }
+      }
+    },
+    {
+      "type": "Remove argument",
+      "data": {
+        "arg1": {
+          "name": "arg1",
+          "required": true,
+          "defaultValue": "default",
+          "inputType": "string",
+          "options": ["option1", "option2"],
+          "skip": false
+        }
+      }
+    },
+    {
+      "type": "Edit argument",
+      "data": {
+        "arg": {
+          "name": "arg1",
+          "required": true,
+          "defaultValue": "default",
+          "inputType": "string",
+          "options": ["option1", "option2"],
+          "skip": false
+        }
+      }
+    },
+    {
+      "type": "Add commands",
+      "data": {
+        "commands": [
+          {
+            "name": "exampleCommand",
+            "groupId": "exampleGroup",
+            "args": {
+              "arg1": {
+                "required": true,
+                "defaultValue": "default",
+                "inputType": "string",
+                "options": ["option1", "option2"],
+                "skip": false
+              }
+            },
+            "onSubmit": "function",
+            "needsReview": false
+          }
+        ]
+      }
+    },
+    {
+      "type": "Remove commands",
+      "data": {
+        "commands": [
+          {
+            "name": "exampleCommand",
+            "groupId": "exampleGroup",
+            "args": {
+              "arg1": {
+                "required": true,
+                "defaultValue": "default",
+                "inputType": "string",
+                "options": ["option1", "option2"],
+                "skip": false
+              }
+            },
+            "onSubmit": "function",
+            "needsReview": false
+          }
+        ]
+      }
+    },
+    {
+      "type": "Submit argument",
+      "data": {
+        "arg1": "value"
+      }
+    },
+    {
+      "type": "xstate.done.actor.validateSingleArgument",
+      "output": {
+        "arg1": "value"
+      }
+    },
+    {
+      "type": "xstate.done.actor.validateArguments",
+      "output": {
+        "arg1": "value"
+      }
+    },
+    {
+      "type": "xstate.error.actor.validateArguments",
+      "error": {
+        "message": "Argument payload is of the wrong type",
+        "arg": {
+          "name": "arg1",
+          "required": true,
+          "defaultValue": "default",
+          "inputType": "string",
+          "options": ["option1", "option2"],
+          "skip": false
+        }
+      }
+    },
+    {
+      "type": "Find and select command",
+      "data": {
+        "name": "exampleCommand",
+        "groupId": "exampleGroup",
+        "argDefaultValues": {
+          "arg1": "default"
+        }
+      }
+    },
+    {
+      "type": "Change current argument",
+      "data": {
+        "arg1": {
+          "name": "arg1",
+          "required": true,
+          "defaultValue": "default",
+          "inputType": "string",
+          "options": ["option1", "option2"],
+          "skip": false
+        }
+      }
+    },
+    {
+      "type": "Set machine manager",
+      "data": {
+        "machines": [],
+        "machineApiIp": null,
+        "currentMachine": null,
+        "setCurrentMachine": "function",
+        "noMachinesReason": "function"
+      }
+    }
+  ]
+}

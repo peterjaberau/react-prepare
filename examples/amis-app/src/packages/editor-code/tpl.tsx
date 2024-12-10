@@ -1,8 +1,8 @@
 import type {SchemaObject} from 'amis';
 
 /**
- * @file amis schema 配置模板，主要很多地方都要全部配置的化，
- * 会有很多份，而且改起来很麻烦，复用率高的放在这管理。
+ * @file amis schema configuration template, mainly many places need to be fully configured.
+ * There will be many copies, and it is very troublesome to change. The ones with high reuse rate are managed here.
  */
 const tpls: {
   [propName: string]: any;
@@ -40,7 +40,7 @@ export function valuePipeOut(value: any) {
       return undefined;
     }
 
-    // 文本1会被转为数字1，值格式慎用
+    // Text 1 will be converted to number 1, use the value format with caution
     return JSON.parse(value);
   } catch (e) {
     return value;
