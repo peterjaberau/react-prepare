@@ -8,6 +8,7 @@ export const useRootMachine: any = () => {
   return {
     actor: actor,
     state: state,
-    components: state.context.components
+    components: state.context.components,
+    global: state.context.global,
   }
 }

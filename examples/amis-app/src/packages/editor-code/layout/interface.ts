@@ -2,21 +2,18 @@ import {
   BaseEventContext,
   InsertEventContext,
   MoveEventContext
-} from '../plugin';
+} from '../pluginTypes.ts';
 
 
 export interface LayoutInterface {
-  beforeInsert?: (
-    context: InsertEventContext,
-    store: any
-  ) => InsertEventContext;
-  afterInsert?: (context: InsertEventContext, store: any) => InsertEventContext;
-  beforeMove?: (context: MoveEventContext, store: any) => MoveEventContext;
-  afterMove?: (context: MoveEventContext, store: any) => MoveEventContext;
-  beforeDelete?: (context: BaseEventContext, store: any) => BaseEventContext;
-  afterDelete?: (context: BaseEventContext, store: any) => BaseEventContext;
-  beforeMoveDown?: (context: BaseEventContext, store: any) => BaseEventContext;
-  afterMoveDown?: (context: BaseEventContext, store: any) => BaseEventContext;
-  beforeMoveUp?: (context: BaseEventContext, store: any) => BaseEventContext;
-  afterMoveUp?: (context: BaseEventContext, store: any) => BaseEventContext;
+  beforeInsert?: (context: any, store: any) => InsertEventContext;
+  afterInsert?: (context: any, store: any) => InsertEventContext;
+  beforeMove?: (context: any, store: any) => MoveEventContext;
+  afterMove?: (context: any, store: any) => MoveEventContext;
+  beforeDelete?: (context: any, store: any) => BaseEventContext;
+  afterDelete?: (context: any, store: any) => BaseEventContext;
+  beforeMoveDown?: (context: any, store: any) => BaseEventContext;
+  afterMoveDown?: (context: any, store: any) => BaseEventContext;
+  beforeMoveUp?: (context: any, store: any) => BaseEventContext;
+  afterMoveUp?: (context: any, store: any) => BaseEventContext;
 }

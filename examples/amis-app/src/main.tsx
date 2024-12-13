@@ -1,13 +1,17 @@
 import { createRoot } from "react-dom/client"
-import Router from "@/router.tsx"
-import { EditorProvider } from "@/amis-editor-core-refactor/store/global.tsx"
 import "@cloudscape-design/global-styles/index.css"
 import "./styles/cloudscape.css"
-import { GlobalProvider } from "@/context/GlobalContext.tsx"
-import { RoutesGenerator } from "@/stories/helpers/RoutesGenerator.tsx"
+import { RoutesGenerator } from "./RoutesGenerator.tsx"
 import { RootMachineProvider } from "@/stories/machines/RootMachineContext.tsx"
+import { CoreEditorMachineProvider } from "@/stories/machines/editor/CoreEditorMachineContext.tsx"
+import { AmisMachineProvider } from "@/stories/machines/amis/AmisMachineContext.tsx"
+
 createRoot(document.getElementById("root")!).render(
   <RootMachineProvider>
-    <RoutesGenerator />
+    <AmisMachineProvider>
+      <CoreEditorMachineProvider>
+        <RoutesGenerator />
+      </CoreEditorMachineProvider>
+    </AmisMachineProvider>
   </RootMachineProvider>,
 )

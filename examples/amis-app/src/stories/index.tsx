@@ -18,12 +18,15 @@ import {
   SideNavigation,
 } from "@cloudscape-design/components"
 import { useNavigate, Routes, Route, useLocation } from "react-router-dom"
-import { availableRoutes, navigationItems } from "@/stories/helpers/initialConfig.tsx"
+import { useRootMachine } from "@/stories/machines/rootMachineStore.ts"
+import { useAmisMachine } from "@/stories/machines/amis/amisMachineStore.ts"
 
 export const StoriesPage = () => {
   // const { statusMessage: statusMessageStories }: any = useChildMachineState("stories", (state: any) => state.context)
   // const storiesMachine = useChildMachine("stories")
-  // const rootMachine = useRootMachine()
+
+  const { global, components, actor } = useRootMachine()
+
 
   const [splitPanelOpen, setSplitPanelOpen] = useState(false)
   const [splitPanelPosition, setSplitPanelPosition] = useState<"side" | "bottom">("side")
@@ -51,7 +54,7 @@ export const StoriesPage = () => {
               header={{ text: 'Side Navigation', href: '/' }}
               activeHref={activeHref}
               onFollow={followLink}
-              items={navigationItems as any}
+              items={global.navigationItems as any}
             />
           </>
         }
@@ -103,7 +106,9 @@ export const StoriesPage = () => {
             badge: false,
             resizable: true,
             defaultSize: 650,
-            content: <Drawer header="Example 1">Example 1 content</Drawer>,
+            content: <Drawer header="Templates (Tpls)">
+             test
+            </Drawer>,
             trigger: {
               iconName: "edit",
             },

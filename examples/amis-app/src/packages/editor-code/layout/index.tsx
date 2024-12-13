@@ -1,45 +1,23 @@
-import React from 'react';
-import { useTheme } from 'antd';
-import { EditorNodeType } from '../store/node';
-import { JSONGetById } from '../util';
-import DefaultLayout from './default';
-import FlexLayout from './flex';
-import { LayoutInterface } from './interface';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import * as React from "react"
+import {JSONGetById} from '../util';
+import FlexLayoutMachine from './flex';
 
-const getLayoutComponent = (
-  schema: any,
-  region: EditorNodeType
-): React.FC<LayoutInterface> => {
+const DefaultLayout: React.FC = ({ children }: any) => {
+  return (
+    <div>
+      {children}
+    </div>
+  );
+};
+
+function getLayoutInstance(schema: any, region: any) {
   if (!region) {
     return DefaultLayout;
   }
   const mode = region?.regionInfo?.dndMode;
   const regionNode = JSONGetById(schema, region?.id);
-  let Component = DefaultLayout;
-  if (typeof mode === 'function') {
-    if (mode(regionNode) === 'flex') {
-      Component = FlexLayout;
-    }
+  if (typeof mode === 'function' && mode(regionNode) === 'flex') {
+    return FlexLayoutMachine;
   }
-  return Component;
-};
-
-const LayoutProvider: React.FC<{ schema: any; region: EditorNodeType }> = ({
-                                                                             schema,
-                                                                             region,
-                                                                           }) => {
-  const theme = useTheme();
-  const LayoutComponent = getLayoutComponent(schema, region);
-
-  return (
-    <DndProvider backend={HTML5Backend}>
-      <div style={{ background: theme.colorBgContainer }}>
-        <LayoutComponent />
-      </div>
-    </DndProvider>
-  );
-};
-
-export default LayoutProvider;
+  return DefaultLayout;
+}

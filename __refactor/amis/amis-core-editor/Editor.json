@@ -6312,20 +6312,20 @@
                         ],
                         "input-file": [
                           {
-                            "eventName": "change",
-                            "eventLabel": "值变化",
-                            "description": "上传文件值变化时触发（上传失败同样会触发）",
+                         "eventName": "change",
+                            "eventLabel": "Value change",
+                            "description": "Triggered when the value of the uploaded file changes (it will also be triggered if the upload fails)",
                             "dataSchema": [
                               {
                                 "type": "object",
                                 "properties": {
                                   "data": {
                                     "type": "object",
-                                    "title": "数据",
+                                    "title": "data",
                                     "properties": {
                                       "file": {
                                         "type": "object",
-                                        "title": "上传的文件"
+                                        "title": "Uploaded file"
                                       }
                                     }
                                   }
@@ -6335,19 +6335,19 @@
                           },
                           {
                             "eventName": "remove",
-                            "eventLabel": "移除文件",
-                            "description": "移除文件时触发",
+                            "eventLabel": "Remove file",
+                            "description": "Fires when a file is removed",
                             "dataSchema": [
                               {
                                 "type": "object",
                                 "properties": {
                                   "data": {
                                     "type": "object",
-                                    "title": "数据",
+                                    "title": "data",
                                     "properties": {
                                       "item": {
                                         "type": "object",
-                                        "title": "被移除的文件"
+                                        "title": "Removed File"
                                       }
                                     }
                                   }
@@ -6357,23 +6357,23 @@
                           },
                           {
                             "eventName": "success",
-                            "eventLabel": "上传成功",
-                            "description": "上传文件成功时触发",
+                            "eventLabel": "Upload successful",
+                            "description": "Triggered when file upload is successful",
                             "dataSchema": [
                               {
                                 "type": "object",
                                 "properties": {
                                   "data": {
                                     "type": "object",
-                                    "title": "数据",
+                                    "title": "Data",
                                     "properties": {
                                       "item": {
                                         "type": "object",
-                                        "title": "上传的文件"
+                                        "title": "Uploaded files"
                                       },
                                       "result": {
                                         "type": "object",
-                                        "title": "远程上传请求成功后返回的响应数据"
+                                        "title": "Response data returned after a successful remote upload request"
                                       }
                                     }
                                   }

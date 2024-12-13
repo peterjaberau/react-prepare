@@ -8,39 +8,18 @@ import {
   Welcome,
   useXAgent,
   useXChat,
-  ConversationsProps,
   ThoughtChain,
   XProvider,
 } from "@ant-design/x"
 import {
-  CheckCircleOutlined,
   CloudUploadOutlined,
-  CommentOutlined,
-  DeleteOutlined,
-  EditOutlined,
   EllipsisOutlined,
-  FireOutlined,
-  HeartOutlined,
-  LoadingOutlined,
   PaperClipOutlined,
-  PlusOutlined,
-  ReadOutlined,
   ShareAltOutlined,
-  SmileOutlined,
-  StopOutlined,
 } from "@ant-design/icons"
 import { Flex, Badge, Button, type GetProp, message, Space, Card, Divider } from "antd"
 import { Button as ButtonCs } from "@cloudscape-design/components"
 import { createStyles } from "antd-style"
-import {
-  initialState,
-  roles,
-  conversationItems,
-  promptsItems,
-  promptsItemsGroupped,
-  conversationMenuItems,
-  throughChainItems,
-} from "./ai-ant/initialConfig.tsx"
 import { useRootMachine } from "@/stories/machines/rootMachineStore.ts"
 
 
@@ -150,7 +129,7 @@ export const AiAnt: React.FC = () => {
           </Flex>
 
           <Flex vertical style={{ flex: 1 }} gap={8}>
-            {items.length > 0 && <Bubble.List style={{ flex: 1 }} items={items} roles={roles} />}
+            {items.length > 0 && <Bubble.List style={{ flex: 1 }} items={items} roles={components.aiAnt.roles} />}
 
             {items.length === 0 && (
               <Bubble.List

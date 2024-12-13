@@ -6,6 +6,8 @@ interface SearchRendererProps {
   store: any;
 }
 
+
+
 const SearchRendererPanel: React.FC<SearchRendererProps> = ({ store }) => {
   const localStorageKey = 'amis-editor-renderer-search-history';
   const [subRenderersByOrder, setSubRenderersByOrder] = useState<Array<any>>([]);

@@ -24339,31 +24339,31 @@ interface GroupedRenderers {
   [tag: string]: SubRenderer[];
 }
 
-export const groupedRenderersByKeyword = (keywords: string[] = []): GroupedRenderers => {
-  const subRenderers: SubRenderer[] = data.store.subRenderers || [];
-  const grouped: GroupedRenderers = {};
-
-  const searchMap = new Map<string, SubRenderer>();
-  matchSorter(subRenderers, keywords, {
-    keys: ['name', 'description', 'scaffold.type', 'searchKeywords']
-  }).forEach((item: SubRenderer) => {
-    searchMap.set(item.id, item);
-  });
-
-  subRenderers.forEach((item: SubRenderer) => {
-    if (searchMap.has(item.id)) {
-      const tags = Array.isArray(item.tags) ? item.tags : [item.tags];
-      tags.forEach((tag: string) => {
-        if (!grouped[tag]) {
-          grouped[tag] = [];
-        }
-        grouped[tag].push(item);
-      });
-    }
-  });
-
-  return grouped;
-};
+// export const groupedRenderersByKeyword = (keywords: string[] = []): GroupedRenderers => {
+//   const subRenderers: SubRenderer[] = data.store.subRenderers || [];
+//   const grouped: GroupedRenderers = {};
+//
+//   const searchMap = new Map<string, SubRenderer>();
+//   matchSorter(subRenderers, keywords, {
+//     keys: ['name', 'description', 'scaffold.type', 'searchKeywords']
+//   }).forEach((item: SubRenderer) => {
+//     searchMap.set(item.id, item);
+//   });
+//
+//   subRenderers.forEach((item: SubRenderer) => {
+//     if (searchMap.has(item.id)) {
+//       const tags = Array.isArray(item.tags) ? item.tags : [item.tags];
+//       tags.forEach((tag: string) => {
+//         if (!grouped[tag]) {
+//           grouped[tag] = [];
+//         }
+//         grouped[tag].push(item);
+//       });
+//     }
+//   });
+//
+//   return grouped;
+// };
 
 // export const groupedRenderersByKeyword = (keywords = [] as any) => {
 //   const subRenderers = (data as any).subRenderers || []

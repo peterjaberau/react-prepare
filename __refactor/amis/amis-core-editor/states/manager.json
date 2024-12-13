@@ -6799,7 +6799,7 @@
       },
       {
         "manager": "[Circular]",
-        "panelTitle": "FormItem",
+        "panelTitle": "表单项",
         "order": -990,
         "pluginIcon": "form-plugin"
       },

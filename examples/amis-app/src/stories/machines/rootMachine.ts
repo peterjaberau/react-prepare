@@ -1,6 +1,6 @@
 import { setup, spawnChild, sendTo, assign, fromPromise, fromCallback } from 'xstate';
 import { Ok } from "ts-results"
-import { initialContext } from "./initialState.ts"
+import { initialContext } from "./rootConfig.ts"
 
 export const rootMachine = setup({
   types: {
